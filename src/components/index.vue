@@ -9,17 +9,12 @@
         <div class="index-top-box app-row-around-layout hidden-xs-only">
           <!--左-->
           <div style="width:30%;" class="app-row-start-layout hidden-xs-only">
-            <h2 style="color:#fff;">Ivan Blog</h2>
+            <router-link class="menu-router-box" to="/">
+              <h2 style="color:#eeeeee;">Ivan Blog</h2>
+            </router-link>
           </div>
           <!--中-->
-          <div class="index-nav-box app-row-between-layout">
-            <!-- <ul style="width:100%;" class="app-row-between-layout hidden-xs-only">
-              <router-link class="router-link-active" to="/"><li>主页</li></router-link>
-              <router-link class="router-link-active" to="/articleList"><li>博客</li></router-link>
-              <router-link class="router-link-active" to="/about"><li>关于</li></router-link>
-              <router-link class="router-link-active" to="/links"><li>友情链接</li></router-link>
-            </ul> -->
-          </div>
+          <div class="index-nav-box app-row-between-layout"></div>
           <!--右-->
           <div style="width:30%;" class="app-row-end-right hidden-xs-only">
             <label>{{currentTime}}</label>
@@ -37,7 +32,7 @@
                   </svg>
                 </transition>
             </div>
-            <canvas id="canvas" width="320" height="568" style="position: absolute; left: 0px; bottom: 0px;"></canvas>
+            <!-- <canvas id="canvas" width="320" height="568" style="position: absolute; left: 0px; bottom: 0px;"></canvas> -->
           </header>
           <div class="carousel-box app-row-between-layout">
             <el-carousel :interval="4000" type="card" arrow="always" trigger="click" height="100px" @change="onChange">
@@ -49,14 +44,17 @@
           
           <!--文章标题及简介-->
           <div class="article-box app-column-start-left hidden-xs-only">
-            <div style="height:80px;width:100%;">
+            <div style="height:80px;width:85%;">
               <label class="article-title text-two-line-omit">{{title}}</label>
             </div>
-            <div style="height:50px;line-height:2;" class="hidden-xs-only">
+            <div style="height:50px;width:85%;line-height:2;" class="hidden-xs-only">
               <label class="article-summary text-two-line-omit">{{summary}}</label>
             </div>
-            <div style="height:40px;">
-              <el-button @click="routerTo" v-if="seen" style="width:100px;" size="small">查看详情</el-button>
+            <div style="height:40px;margin-top:20px;">
+               <el-button type="info" size="small" @click="routerTo" v-if="seen" style="width:100px;background:#000;opacity:0.9;">
+                 LET ' S GO
+                 <i style="color:#eee;" class="el-icon-caret-right"></i>
+                </el-button>
             </div>
           </div>
         </div>
@@ -78,7 +76,6 @@ export default {
       timer: "",                
       currentTime: new Date(),  
       articleList: [],
-      coverImgUrl: 'https://www.ivan.group/files/blog/blog_index_bg.jpg',
       id:'',
       title: '',
       summary: '',
@@ -130,7 +127,6 @@ export default {
           this.id = id
           this.title = title
           this.summary = summary
-          this.coverImgUrl = img
           this.seen = true
         }
       }
@@ -170,7 +166,7 @@ export default {
   }
   label{
     font-size: 10px;
-    color: #555555;
+    color: #eeeeee;
   }
   li:hover{
     padding-bottom: 2px;
@@ -208,26 +204,28 @@ export default {
 
   /**自定义样式**/
   .outer-box{
-    background: url('../assets/index_bg4.jpg');
+    background: url('../assets/index/index_bg7.jpg');
     position: fixed;
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: round;
   }
   .outer-border-box{
     width:95%;
+    height: 85%;
     border: 15px solid #fff;
     border-radius: 10px;
   }
   .inner-box{
     width: 100%;
+    height: 100%;
   }
   .index-top-box{
-    opacity: 0.8;
+    opacity: 0.9;
     background: #292929;
     width: 100%;
-    height: 50px;
+    height: 60px;
   }
   .index-nav-box{
     width:25%;
@@ -278,12 +276,12 @@ export default {
     justify-content: center;
   }
   .outer-box{
-    background: url('../assets/index_bg4.jpg');
+    background: url('../assets/index/index_bg8.jpg');
     position: absolute;
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-repeat: round;
+    background-repeat: unset;
   }
   .outer-border-box{
     width: 90%;

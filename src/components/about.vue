@@ -2,17 +2,12 @@
   <div>
     <!--顶部-->
     <div class="top-box app-row-start-layout shadow">
-      <div class="top-width app-column-center-layout hidden-xs-only">
-          <router-link class="router-link-active" to="/">
-            <img class="top-logo" src="../assets/ivan.jpg" />
-          </router-link>
-      </div>
-      <ul class="hidden-xs-only">
-        <router-link class="router-link-active" to="/"><li>主页</li></router-link>
-        <router-link class="router-link-active" to="/articleList"><li>博客</li></router-link>
-        <router-link class="router-link-active" to="/about"><li>关于</li></router-link>
-        <router-link class="router-link-active" to="/links"><li>友情链接</li></router-link>
-      </ul>
+      <router-link class="router-link-active" to="/">
+        <div class="app-row-center-layout hidden-xs-only">
+            <img class="top-logo" src="../assets/avg.jpg" />
+            <h2 style="color:#eee;">Ivan | 晏飞的个人博客</h2>
+        </div>
+      </router-link>
     </div>
 
     <!--中部-->
@@ -82,9 +77,9 @@
             <h3>随机文章</h3>
             <div class="right-top-box-item" v-for="(item,index) in articleRandList" :key="index">
               <img @click="routerTo(item.id)" class="article-list-right-img" :src="item.img" /> 
-              <div class="right-top-box-item-title">
+              <!-- <div class="right-top-box-item-title">
                 <h5>{{item.title}}</h5>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="right-bottom-box shadow">
