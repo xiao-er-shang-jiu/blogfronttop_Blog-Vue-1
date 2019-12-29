@@ -3,7 +3,7 @@
     <!--顶部-->
     <div class="top-box app-row-start-layout shadow">
       <router-link class="router-link-active" to="/">
-        <div class="app-row-center-layout hidden-xs-only">
+        <div class="app-row-center-layout">
             <img class="top-logo" src="../assets/avg.jpg" />
             <h2 style="color:#eee;">Ivan | 晏飞的个人博客</h2>
         </div>
@@ -15,6 +15,12 @@
       <div class="center-box">
         <!--左侧部分(文章列表)-->
         <div class="content-box app-column-start-left">
+          <!--位置-->
+          <el-breadcrumb class="pos-box app-row-start-left" separator-class="el-icon-arrow-right">
+            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item>博客</el-breadcrumb-item>
+          </el-breadcrumb>
+          
           <div v-for="(article,aIndex) in articleList" :key="aIndex">
             <div @click="routerTo(article.id)" class="article-list-left-box app-column-start-left shadow">
               <!-- <img v-if="article.isTop == 1" class="istop" src="../assets/istop.jpg" /> -->

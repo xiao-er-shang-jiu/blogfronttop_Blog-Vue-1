@@ -3,7 +3,7 @@
     <!--顶部-->
     <div class="top-box app-row-start-layout shadow">
       <router-link class="router-link-active" to="/">
-        <div class="app-row-center-layout hidden-xs-only">
+        <div class="app-row-center-layout">
             <img class="top-logo" src="../assets/avg.jpg" />
             <h2 style="color:#eee;">Ivan | 晏飞的个人博客</h2>
         </div>
@@ -15,6 +15,12 @@
       <div class="center-box">
         <!--左侧部分(文章详情)-->
         <div class="content-box app-column-start-left">
+          <!--位置-->
+          <el-breadcrumb class="pos-box app-row-start-left" separator-class="el-icon-arrow-right">
+            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/articleList' }">博客</el-breadcrumb-item>
+            <el-breadcrumb-item>文章</el-breadcrumb-item>
+          </el-breadcrumb>
           <div class="white-bg app-column-start-left">
             <div class="content-item">
               <h2>{{article.title}}</h2>
@@ -172,7 +178,6 @@ export default {
       replyContent:'',
       parentId:'',
       i: -1,
-      btnFlag:false,
       timer: null
     }
   },
@@ -320,30 +325,6 @@ export default {
         console.log(this.commentList)
       })
     },
-    
-    // 点击图片回到顶部方法，加计时器是为了过渡顺滑
-    backTop () {
-      const that = this
-      let timer = setInterval(() => {
-        let ispeed = Math.floor(-that.scrollTop / 5)
-        document.documentElement.scrollTop = document.body.scrollTop = that.scrollTop + ispeed
-        if (that.scrollTop === 0) {
-          clearInterval(timer)
-        }
-      }, 15)
-    },
- 
-    // 为了计算距离顶部的高度，当高度大于60显示回顶部图标，小于60则隐藏
-    scrollToTop () {
-      const that = this
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-      that.scrollTop = scrollTop
-      if (that.scrollTop > 100) {
-        that.btnFlag = true
-      } else {
-        that.btnFlag = false
-      }
-    }
   }
 }
 </script>

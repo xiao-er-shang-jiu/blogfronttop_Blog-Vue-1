@@ -3,7 +3,7 @@
     <!--顶部-->
     <div class="top-box app-row-start-layout shadow">
       <router-link class="router-link-active" to="/">
-        <div class="app-row-center-layout hidden-xs-only">
+        <div class="app-row-center-layout">
             <img class="top-logo" src="../assets/avg.jpg" />
             <h2 style="color:#eee;">Ivan | 晏飞的个人博客</h2>
         </div>
@@ -15,6 +15,11 @@
       <div class="center-box">
         <!--个人资料)-->
         <div class="about-box">
+          <!--位置-->
+          <el-breadcrumb class="pos-box app-row-start-left" separator-class="el-icon-arrow-right">
+            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item>关于</el-breadcrumb-item>
+          </el-breadcrumb>
           <div class="about-top-box">
             <h3>个人资料</h3>
           </div>

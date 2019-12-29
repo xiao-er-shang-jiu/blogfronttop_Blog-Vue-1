@@ -1,6 +1,6 @@
 <template>
     <div>
-      <el-tooltip class="item" effect="dark" content="点击展开菜单" placement="left">
+      <el-tooltip class="item" effect="dark" content="点击展开" placement="bottom">
         <div @click="drawer=true" class="menu-btn">
           <i style="color:#eee;" class="el-icon-s-unfold"></i>
         </div>
@@ -70,9 +70,9 @@
   .menu-btn
     position fixed
     right 0px
-    top 15px
+    top 20px
     z-index 30
-    padding 3px 6px 3px 6px
+    padding 12px 15px 12px 15px
     border 1px solid rgba(255,255,255,0.6)
     background #333333
     cursor pointer
@@ -88,16 +88,13 @@
     padding 5px
     border-radius 50%
     margin 0px 10px 0px 10px
+  .menu-avg:hover
     animation rotate 3s linear infinite
   .menu-router-box
     text-decoration none
     width 100%
     padding 10px 0px 10px 0px
   .menu-router-box:hover 
-    background #eee
-
-@media screen and (max-width: 750px)
-  .menu-router-box hover 
     background #eee
     
 </style>
