@@ -11,7 +11,8 @@
     </div>
 
     <!--中部-->
-    <div class="center app-column-center-layout shadow">
+    <div
+     class="center app-column-center-layout shadow">
       <div class="center-box">
         <!--左侧部分(文章详情)-->
         <div class="content-box app-column-start-left">
@@ -253,6 +254,12 @@ export default {
 
     //发表评论
     send(){
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
       var name = this.name
       var content = this.content
       if(name != "" && content != ""){
@@ -268,9 +275,10 @@ export default {
               message: res.msg,
               type: 'success'
             });
-            clearTimeout(this.timer);  //清除延迟执行
+            clearTimeout(this.timer);       //清除延迟执行
             this.timer = setTimeout(()=>{   //设置延迟执行
                 this.reload()
+                loading.close();
             },1500);
           }
         })
@@ -288,6 +296,12 @@ export default {
 
     //回复评论
     reply(id){
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
       var name = this.replyName
       var content = this.replyContent
       if(name != "" && content != ""){
@@ -307,6 +321,7 @@ export default {
             clearTimeout(this.timer);  //清除延迟执行
             this.timer = setTimeout(()=>{   //设置延迟执行
                 this.reload()
+                loading.close();
             },1500);
           }
         })
