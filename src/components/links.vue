@@ -38,15 +38,9 @@
                 </a>
               </div>
               <div class="link-item-box app-column-center-layout">
-                <a class="link-name app-column-center-layout" href="https://88250.b3log.org/" target="_blank">
-                  <img class="link-img" src="../assets/link/D.jpg" />
-                  D
-                </a>
-              </div>
-              <div class="link-item-box app-column-center-layout">
-                <a class="link-name app-column-center-layout" href="https://www.tapme.top/" target="_blank">
-                  <img class="link-img" src="../assets/link/fleyX.jpg" />
-                  fleyX
+                <a class="link-name app-column-center-layout" href="https://www.wmyskxz.com/" target="_blank">
+                  <img class="link-img" src="../assets/link/wmyskxz.jpg" />
+                  我没有三颗心脏
                 </a>
               </div>
             </div>

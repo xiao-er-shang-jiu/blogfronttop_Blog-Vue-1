@@ -273,6 +273,8 @@ export default {
           if(res.code == 200){
             this.$message({
               message: res.msg,
+              offset: 200,
+              center: true,
               type: 'success'
             });
             clearTimeout(this.timer);       //清除延迟执行
@@ -316,6 +318,8 @@ export default {
           if(res.code == 200){
             this.$message({
               message: res.msg,
+              offset: 200,
+              center: true,
               type: 'success'
             });
             clearTimeout(this.timer);  //清除延迟执行
@@ -353,8 +357,36 @@ export default {
     float: left;
     margin:0 10px;
   }
-  .white-bg >>> img {
-    width:100%;
-    height: auto;
+
+  .center-left-item-box >>> img {
+    display: block;
+    margin: 0 auto;
+    width:100% !important;
+    height: auto !important;
+  }
+
+  .center-left-item-box >>> pre{
+    max-width: 100%;
+    padding: 20px;
+    background: #F5F5F5;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    word-break: break-all;
+    font-size: 12px !important;
+    overflow-x: auto;
+  }
+
+  .center-left-item-box >>> code{
+    max-width: 100%;
+    word-break: break-all;
+    font-size: 12px !important;
+  }
+
+  .center-left-item-box >>> code span{
+    font-size: 12px !important;
+  }
+
+  .center-left-item-box >>> table{
+    max-width: 100%;
   }
 </style>

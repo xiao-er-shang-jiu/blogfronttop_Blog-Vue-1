@@ -6,7 +6,7 @@
         </div>
       </el-tooltip>
 
-      <el-drawer title="右侧菜单" size="80px"
+      <el-drawer title="右侧菜单" size="150px"
         :visible.sync="drawer" 
         :with-header="false">
           <ul class="menu-box app-column-start-layout">

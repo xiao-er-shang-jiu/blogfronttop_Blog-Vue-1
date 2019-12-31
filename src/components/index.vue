@@ -23,18 +23,24 @@
         <!--中部内容-->
         <div class="content-bg-box app-column-start-end">
           <!--移动端展示-->
-          <header @click="routerTo" class="header header--index" style="overflow:hidden;width:100%;">
+          <header class="header header--index" style="overflow:hidden;width:100%;">
             <div class="wrapper header__title">
-                <h2 class="header__desc header__desc--title mobile-center-title">Ivan | 晏飞的个人博客</h2>
+                <div style="height:100px;" class="app-column-between-layout">
+                  <h2 class="header__desc mobile-center-title">Ivan | 晏飞的个人博客</h2>
+                  <span class="header__desc article-title">It's more important to go far than to go fast</span>
+                </div>
                 <transition name="el-fade-in-linear">
-                  <svg v-if="seen" class="header__down" id="headerDown" viewBox="0 0 32 32" width="100%" height="100%">
-                      <path d="M15.992 25.304c-0 0-0 0-0.001 0-0.516 0-0.981-0.216-1.31-0.563l-0.001-0.001-14.187-14.996c-0.306-0.323-0.494-0.76-0.494-1.241 0-0.998 0.809-1.807 1.807-1.807 0.517 0 0.983 0.217 1.313 0.565l0.001 0.001 12.875 13.612 12.886-13.612c0.331-0.348 0.797-0.565 1.314-0.565 0.481 0 0.918 0.187 1.242 0.493l-0.001-0.001c0.723 0.687 0.755 1.832 0.072 2.555l-14.201 14.996c-0.33 0.348-0.795 0.564-1.311 0.564-0.001 0-0.003 0-0.004 0h0z"></path>
-                  </svg>
+                  <router-link class="menu-router-box" to="/articleList">
+                    <svg class="header__down" id="headerDown" viewBox="0 0 32 32" width="100%" height="100%">
+                        <path d="M15.992 25.304c-0 0-0 0-0.001 0-0.516 0-0.981-0.216-1.31-0.563l-0.001-0.001-14.187-14.996c-0.306-0.323-0.494-0.76-0.494-1.241 0-0.998 0.809-1.807 1.807-1.807 0.517 0 0.983 0.217 1.313 0.565l0.001 0.001 12.875 13.612 12.886-13.612c0.331-0.348 0.797-0.565 1.314-0.565 0.481 0 0.918 0.187 1.242 0.493l-0.001-0.001c0.723 0.687 0.755 1.832 0.072 2.555l-14.201 14.996c-0.33 0.348-0.795 0.564-1.311 0.564-0.001 0-0.003 0-0.004 0h0z"></path>
+                    </svg>
+                  </router-link>
                 </transition>
             </div>
-            <!-- <canvas id="canvas" width="320" height="568" style="position: absolute; left: 0px; bottom: 0px;"></canvas> -->
           </header>
-          <div class="carousel-box app-row-between-layout">
+
+          <!--轮播图-->
+          <div class="carousel-box app-row-between-layout hidden-xs-only">
             <el-carousel :interval="4000" type="card" arrow="always" trigger="click" height="100px" @change="onChange">
               <el-carousel-item v-for="(item,index) in articleList" :key="index">
                 <img :src="item.img" alt="轮播图" style="width:100%;overflow:hidden;height:100%;" />
@@ -42,20 +48,16 @@
             </el-carousel>
           </div>
           
+          
           <!--文章标题及简介-->
-          <div class="article-box app-column-start-left hidden-xs-only">
-            <div style="height:80px;width:85%;">
-              <label class="article-title text-two-line-omit">{{title}}</label>
-            </div>
-            <div style="height:50px;width:85%;line-height:2;" class="hidden-xs-only">
-              <label class="article-summary text-two-line-omit">{{summary}}</label>
-            </div>
-            <div style="height:40px;margin-top:20px;">
+          <div class="article-box hidden-xs-only">
+            <div style="height:35px;">
                <el-button type="info" size="small" @click="routerTo" v-if="seen" style="width:100px;background:#000;opacity:0.9;">
                  LET ' S GO
                  <i style="color:#eee;" class="el-icon-caret-right"></i>
                 </el-button>
             </div>
+            <h1 class="article-title header__desc">It's more important to go far than to go fast</h1>
           </div>
         </div>
       </div>
@@ -204,12 +206,13 @@ export default {
 
   /**自定义样式**/
   .outer-box{
-    background: url('../assets/index/index_bg7.jpg');
+    background: url(/img/index_bg.bd79f0b1.jpg);
     position: fixed;
     width: 100%;
     height: 100%;
+    background-position: center center;
     background-size: cover;
-    background-repeat: round;
+    background-repeat: unset;
   }
   .outer-border-box{
     width:95%;
@@ -235,17 +238,20 @@ export default {
     height: 100%;
   }
   .article-box{
-    width:80%;
-    height:200px;
-    margin-bottom:150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width:90%;
+    height:100px;
+    margin-bottom:100px;
     line-height:35px;
   }
   .article-title{
-    font-size:25px;
-    border-bottom:none;
-  }
-  .article-summary{
-    font-size:12px;
+    color:#000;
+    opacity:0.9;
+    font-weight:900;
+    font-size:30px;
+    text-shadow:0 3px 6px rgba(0,0,0,0.3);
   }
   .header{
     display: none;
@@ -262,9 +268,6 @@ export default {
   .article-box{
     width:80%;
   }
-  .article-title{
-    font-size: 16px;
-  }
   .carousel-box{
     position: absolute;
     width: 100%;
@@ -275,11 +278,19 @@ export default {
     flex-direction: column;
     justify-content: center;
   }
+  .article-title{
+    color:#eee;
+    opacity:0.9;
+    font-weight:900;
+    font-size:14px;
+    text-shadow:0 3px 6px rgba(0,0,0,0.3);
+  }
   .outer-box{
-    background: url('../assets/index/index_bg8.jpg');
+    background: url('../assets/index/index_bg.jpg');
     position: absolute;
     width: 100%;
     height: 100%;
+    background-position: center center;
     background-size: cover;
     background-repeat: unset;
   }

@@ -1433,10 +1433,10 @@ a {
 }
 .header__title {
   position: relative;
-  top: 260px;
+  top: 20px;
   -webkit-box-align: center;
   align-items: center;
-  height: 150px;
+  height: 420px;
   display: -webkit-box;
   display: flex;
   -webkit-box-pack: center;
@@ -1469,7 +1469,7 @@ a {
   line-height: 24px;
   text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
   -webkit-animation: fade-in-down 0.9s both;
-  animation: fade-in-down 0.9s both;
+  animation: fade-in-down 2s both;
   -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
 }
