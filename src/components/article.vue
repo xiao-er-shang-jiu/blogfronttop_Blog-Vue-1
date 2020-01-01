@@ -277,12 +277,19 @@ export default {
               center: true,
               type: 'success'
             });
-            clearTimeout(this.timer);       //清除延迟执行
-            this.timer = setTimeout(()=>{   //设置延迟执行
-                this.reload()
-                loading.close();
-            },1500);
+          } else {
+            this.$message({
+              message: res,
+              offset: 200,
+              center: true,
+              type: 'error'
+            });
           }
+          clearTimeout(this.timer);       //清除延迟执行
+            this.timer = setTimeout(()=>{   //设置延迟执行
+              this.reload()
+              loading.close();
+          },1500);
         })
       } else if(name == ""){
         this.$message.error('请输入昵称信息')
@@ -322,12 +329,19 @@ export default {
               center: true,
               type: 'success'
             });
-            clearTimeout(this.timer);  //清除延迟执行
-            this.timer = setTimeout(()=>{   //设置延迟执行
-                this.reload()
-                loading.close();
-            },1500);
+          } else {
+            this.$message({
+              message: res,
+              offset: 200,
+              center: true,
+              type: 'error'
+            });
           }
+          clearTimeout(this.timer);       //清除延迟执行
+            this.timer = setTimeout(()=>{   //设置延迟执行
+              this.reload()
+              loading.close();
+          },1500);
         })
         this.i = -1
       } else if(name == ""){
