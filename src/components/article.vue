@@ -269,7 +269,6 @@ export default {
           articleId: this.$route.params.id
         }
         postComment(form).then((res) => {
-          console.log('评论返回值: ' + res)
           if(res.code == 0){
             this.$message({
               message: res.msg,
@@ -286,9 +285,9 @@ export default {
             });
           }
           clearTimeout(this.timer);       //清除延迟执行
-            this.timer = setTimeout(()=>{   //设置延迟执行
-              this.reload()
-              loading.close();
+          this.timer = setTimeout(()=>{   //设置延迟执行
+            this.reload()
+            loading.close();
           },1500);
         })
       } else if(name == ""){
@@ -322,6 +321,7 @@ export default {
           parentId: id
         }
         replyComment(form).then((res) => {
+          console.log('评论返回值: ' + res)
           if(res.code == 0){
             this.$message({
               message: res.msg,
@@ -338,9 +338,9 @@ export default {
             });
           }
           clearTimeout(this.timer);       //清除延迟执行
-            this.timer = setTimeout(()=>{   //设置延迟执行
-              this.reload()
-              loading.close();
+          this.timer = setTimeout(()=>{   //设置延迟执行
+            this.reload()
+            loading.close();
           },1500);
         })
         this.i = -1
