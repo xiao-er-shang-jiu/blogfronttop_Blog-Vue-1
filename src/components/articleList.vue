@@ -100,21 +100,21 @@ export default {
     //获取文章信息
     getArticleList() {
       getArticleList().then((res) => {
-        this.articleList = res
+        this.articleList = res.data
       })
     },
 
     //获取随机文章
     getListByRand() {
       getListByRand().then((res) => {
-        this.articleRandList = res
+        this.articleRandList = res.data
       })
     },
 
     //获取分类列表
     getCategoryList(){
       getCategoryList().then((res) => {
-        this.categoryList = res
+        this.categoryList = res.data
       })
     },
 

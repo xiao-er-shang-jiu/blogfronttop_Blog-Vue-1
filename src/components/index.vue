@@ -111,7 +111,8 @@ export default {
     //获取文章信息
     blogIndex() {
       blogIndex().then((res) => {
-        this.articleList = res
+        console.log(res)
+        this.articleList = res.data
       })
       this.btnVisible = true
     },
@@ -123,7 +124,7 @@ export default {
       for(var k in articleList){
         if(k == i){
           var id = articleList[k].id
-          var img = articleList[k].img
+          //var img = articleList[k].img
           var title = articleList[k].title
           var summary = articleList[k].summary
           this.id = id

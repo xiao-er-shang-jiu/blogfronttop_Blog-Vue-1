@@ -199,7 +199,6 @@ export default {
 
   //页面加载时
   created() {
-    console.log('article初始化')
     var id = this.$route.params.id
     this.getArticle(id)
     this.getListByRand()
@@ -214,21 +213,21 @@ export default {
     //获取文章信息
     getArticle(id) {
       getArticle(id).then((res) => {
-        this.article = res
+        this.article = res.data
       })
     },
 
     //获取随机文章
     getListByRand() {
       getListByRand().then((res) => {
-        this.articleRandList = res
+        this.articleRandList = res.data
       })
     },
 
     //获取分类列表
     getCategoryList(){
       getCategoryList().then((res) => {
-        this.categoryList = res
+        this.categoryList = res.data
       })
     },
 
@@ -270,7 +269,8 @@ export default {
           articleId: this.$route.params.id
         }
         postComment(form).then((res) => {
-          if(res.code == 200){
+          console.log('评论返回值: ' + res)
+          if(res.code == 0){
             this.$message({
               message: res.msg,
               offset: 200,
@@ -315,7 +315,7 @@ export default {
           parentId: id
         }
         replyComment(form).then((res) => {
-          if(res.code == 200){
+          if(res.code == 0){
             this.$message({
               message: res.msg,
               offset: 200,
@@ -340,8 +340,7 @@ export default {
     //获取评论数据列表
     getCommentList(id){
       getCommentList(id).then((res) => {
-        this.commentList = res
-        console.log(this.commentList)
+        this.commentList = res.data
       })
     },
   }
