@@ -1,5 +1,6 @@
 <template>
     <div>
+      <cube></cube>
       <pop></pop>
       <router-view v-if="isRouterAlive"></router-view>
       <go-top></go-top>
@@ -8,11 +9,13 @@
 
 <script>
 import pop from './components/pop.vue'
+import cube from './components/cube.vue'
 import goTop from './components/goTop.vue'
 export default {
   name: 'app',
   components: {
     'pop':pop,
+    'cube':cube,
     'go-top':goTop
     
   },
