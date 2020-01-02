@@ -269,7 +269,8 @@ export default {
           articleId: this.$route.params.id
         }
         postComment(form).then((res) => {
-          if(res.code == 0){
+          //console.log('回复返回值: ' + res)
+          if(res.code == 200){
             this.successPop(res.msg)
           } else {
             this.errorPop(res)
@@ -311,8 +312,8 @@ export default {
           parentId: id
         }
         replyComment(form).then((res) => {
-          console.log('评论返回值: ' + res)
-          if(res.code == 0){
+          //console.log('回复返回值: ' + res)
+          if(res.code == 200){
             this.successPop(res.msg)
           } else {
             this.errorPop(res)
@@ -353,7 +354,7 @@ export default {
     errorPop(res){
       this.$notify({
         title: '警告',
-        message: res,
+        message: res.msg || res,
         type: 'warning',
         showClose: false,
         position: 'bottom-right'

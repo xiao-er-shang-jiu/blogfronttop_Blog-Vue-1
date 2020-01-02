@@ -11,6 +11,7 @@ export function postComment(form) {
     return axios.get(url,{params: {
         name,email,content,articleId
     }}).then((res) => {
+        //console.log("请求: " + JSON.stringify(res))
         return Promise.resolve(res.data)
     }).catch(function(response) {
         console.log(response)
