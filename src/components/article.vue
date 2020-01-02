@@ -270,19 +270,9 @@ export default {
         }
         postComment(form).then((res) => {
           if(res.code == 0){
-            this.$message({
-              message: res.msg,
-              offset: 200,
-              center: true,
-              type: 'success'
-            });
+            this.successPop(res.msg)
           } else {
-            this.$message({
-              message: res,
-              offset: 200,
-              center: true,
-              type: 'error'
-            });
+            this.errorPop(res)
           }
           clearTimeout(this.timer);       //清除延迟执行
           this.timer = setTimeout(()=>{   //设置延迟执行
@@ -323,27 +313,17 @@ export default {
         replyComment(form).then((res) => {
           console.log('评论返回值: ' + res)
           if(res.code == 0){
-            this.$message({
-              message: res.msg,
-              offset: 200,
-              center: true,
-              type: 'success'
-            });
+            this.successPop(res.msg)
           } else {
-            this.$message({
-              message: res,
-              offset: 200,
-              center: true,
-              type: 'error'
-            });
+            this.errorPop(res)
           }
           clearTimeout(this.timer);       //清除延迟执行
           this.timer = setTimeout(()=>{   //设置延迟执行
             this.reload()
             loading.close();
+            this.i = -1
           },1500);
         })
-        this.i = -1
       } else if(name == ""){
         this.$message.error('请输入昵称信息')
       } else if(content == ""){
@@ -357,6 +337,29 @@ export default {
         this.commentList = res.data
       })
     },
+
+    //成功侧移弹框
+    successPop(res){
+      this.$notify({
+        title: '成功',
+        message: res,
+        type: 'success',
+        showClose: false,
+        position: 'bottom-right'
+      });
+    },
+
+    //失败侧移弹框
+    errorPop(res){
+      this.$notify({
+        title: '警告',
+        message: res,
+        type: 'warning',
+        showClose: false,
+        position: 'bottom-right'
+      });
+    }
+    
   }
 }
 </script>
