@@ -43,7 +43,7 @@
           <div class="carousel-box app-row-between-layout hidden-xs-only">
             <el-carousel :interval="4000" type="card" arrow="always" trigger="click" height="100px" @change="onChange">
               <el-carousel-item v-for="(item,index) in articleList" :key="index">
-                <img :src="item.img" alt="轮播图" style="width:100%;overflow:hidden;height:100%;" />
+                <img :src="item.img" alt="轮播图" class="carousel-img" />
               </el-carousel-item>
             </el-carousel>
           </div>
@@ -52,7 +52,7 @@
           <!--文章标题及简介-->
           <div class="article-box hidden-xs-only">
             <div style="height:35px;">
-               <el-button type="info" size="small" @click="routerTo" v-if="seen" style="width:100px;background:#000;opacity:0.9;">
+               <el-button type="info" size="small" @click="routerTo" v-if="seen" class="bottom-btn">
                  LET ' S GO
                  <i style="color:#eee;" class="el-icon-caret-right"></i>
                 </el-button>
@@ -157,168 +157,145 @@ export default {
 </script>
 
 <!-- 样式 -->
-<style scoped>
+<style scoped lang="stylus">
   /**标签样式**/
-  ul{
-    list-style: none;
-  }
-  li{
-    font-size: 13px;
-    color: #fff;
-    text-decoration: none;
-  }
-  label{
-    font-size: 10px;
-    color: #eeeeee;
-  }
-  li:hover{
-    padding-bottom: 2px;
-    border-bottom: 2px solid #fff;
-  }
-  .router-link-active {
-    text-decoration: none;
-  }
+  ul
+    list-style none
+  li
+    font-size 13px
+    color #fff
+    text-decoration none
+  label
+    font-size 10px
+    color #eeeeee
+  li:hover
+    padding-bottom 2px
+    border-bottom 2px solid #fff
+  .router-link-active 
+    text-decoration none
 
   /**element-ui样式**/
-  .carousel-box{
-    position: absolute;
-    right: 50px;
-    bottom: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .el-carousel--horizontal {
-    width: 300px;
-  }
-  .el-carousel__item h3 {
-    color: #475669;
-    font-size: 14px;
-    opacity: 0.75;
-    line-height: 200px;
-    margin: 0;
-  }
-  .el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
-  }
-  .el-carousel__item:nth-child(2n+1) {
-    background-color: #d3dce6;
-  }
+  .carousel-box
+    position absolute
+    right 50px
+    bottom 60px
+    display flex
+    flex-direction column
+    justify-content space-between
+  .carousel-img
+    width 100%
+    overflow hidden
+    height 100%
+  .el-carousel--horizontal
+    width 300px
+  .el-carousel__item h3
+    color #475669
+    font-size 14px
+    opacity 0.75
+    line-height 200px
+    margin 0
+  .el-carousel__item:nth-child(2n) 
+    background-color #99a9bf
+  .el-carousel__item:nth-child(2n+1) 
+    background-color #d3dce6
 
   /**自定义样式**/
-  .outer-box{
-    background: url(/img/index_bg.bd79f0b1.jpg);
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-position: center center;
-    background-size: cover;
-    background-repeat: unset;
-  }
-  .outer-border-box{
-    width:95%;
-    height: 85%;
-    border: 15px solid #fff;
-    border-radius: 10px;
-  }
-  .inner-box{
-    width: 100%;
-    height: 100%;
-  }
-  .index-top-box{
-    opacity: 0.9;
-    background: #292929;
-    width: 100%;
-    height: 60px;
-  }
-  .index-nav-box{
-    width:25%;
-  }
-  .content-bg-box{
-    background-size: 100% 100%;
-    height: 100%;
-  }
-  .article-box{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width:90%;
-    height:100px;
-    margin-bottom:100px;
-    line-height:35px;
-  }
-  .article-title{
-    color:#000;
-    opacity:0.9;
-    font-weight:900;
-    font-size:30px;
-    text-shadow:0 3px 6px rgba(0,0,0,0.3);
-  }
-  .header{
-    display: none;
-  }
-  #headerDown{
-    display: none;
-  }
+  .outer-box
+    background-image  url('../assets/index/index_bg.jpg')
+    position fixed
+    width 100%
+    height 100%
+    background-position center center
+    background-size cover
+    background-repeat unset
+  .outer-border-box
+    width 95%
+    height 85%
+    border 15px solid #fff
+    border-radius 10px
+  .inner-box
+    width 100%
+    height 100%
+  .index-top-box
+    opacity 0.9
+    background #292929
+    width 100%
+    height 60px
+  .index-nav-box
+    width 25%
+  .content-bg-box
+    background-size 100% 100%
+    height 100%
+  .article-box
+    display flex
+    flex-direction column
+    justify-content space-between
+    width 90%
+    height 100px
+    margin-bottom 100px
+    line-height 35px
+  .article-title
+    color #000
+    opacity 0.9
+    font-weight 900
+    font-size 30px
+    text-shadow 0 3px 6px rgba(0,0,0,0.3)
+  .bottom-btn
+    width 100px
+    background #000
+    opacity 0.9
+  .header
+    display none
+  #headerDown
+    display none
 
   /* 移动端样式 */
-  @media screen and (max-width: 750px) {
-  .index-nav-box{
-    width:80%;
-  }
-  .article-box{
-    width:80%;
-  }
-  .carousel-box{
-    position: absolute;
-    width: 100%;
-    right: 0px;
-    bottom: 280px;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .article-title{
-    color:#eee;
-    opacity:0.9;
-    font-weight:900;
-    font-size:14px;
-    text-shadow:0 3px 6px rgba(0,0,0,0.3);
-  }
-  .outer-box{
-    background: url('../assets/index/index_bg.jpg');
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-position: center center;
-    background-size: cover;
-    background-repeat: unset;
-  }
-  .outer-border-box{
-    width: 90%;
-    height: 450px;
-    border: 10px solid #fff;
-    border-radius: 5px;
-    position: fixed;
-    z-index: 1;
-  }
-  .mobile-center-box{
-    position: absolute;
-    top: 15%;
-  }
-  .mobile-center-title{
-    font-size: 23px;
-    color: #eee;
-    letter-spacing: -1px;
-    font-weight: 700;
-    text-shadow: 0 3px 6px rgba(0,0,0,0.3);
-  }
-  .header{
-    display: block;
-  }
-  #headerDown{
-    display: block;
-  }
-}
+  @media screen and (max-width: 750px) 
+    .index-nav-box
+      width 80%
+    .article-box
+      width 80%
+    .carousel-box
+      position absolute
+      width 100%
+      right 0px
+      bottom 280px
+      z-index 2
+      display flex
+      flex-direction column
+      justify-content center
+    .article-title
+      color #eee
+      opacity 0.9
+      font-weight 900
+      font-size 14px
+      text-shadow 0 3px 6px rgba(0,0,0,0.3)
+    .outer-box
+      background url('../assets/index/index_bg.jpg')
+      position absolute
+      width 100%
+      height 100%
+      background-position center center
+      background-size cover
+      background-repeat unset
+    .outer-border-box
+      width 90%
+      height 450px
+      border 10px solid #fff
+      border-radius 5px
+      position fixed
+      z-index 1
+    .mobile-center-box
+      position absolute
+      top 15%
+    .mobile-center-title
+      font-size 23px
+      color #eee
+      letter-spacing -1px
+      font-weight 700
+      text-shadow 0 3px 6px rgba(0,0,0,0.3)
+    .header
+      display block
+    #headerDown
+      display block
 </style>
