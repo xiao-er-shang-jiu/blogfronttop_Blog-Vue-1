@@ -11,8 +11,7 @@
     </div>
 
     <!--中部-->
-    <div
-     class="center app-column-center-layout shadow">
+    <div class="center app-column-center-layout shadow">
       <div class="center-box">
         <!--左侧部分(文章详情)-->
         <div class="content-box app-column-start-left">
@@ -33,10 +32,15 @@
                 <span><i class="el-icon-chat-dot-round"></i> {{commentList.length}}</span>
               </div>
             </div>
-            <div class="center-left-item-box" v-html="article.content"></div>
+            <transition name="el-fade-in-linear">
+              <div class="center-left-item-box bodyFont" v-html="article.content" ref="bodyFont" :class="{bodyHeight:contentStatus}"></div>
+            </transition>
+            <div class="contentToggle" v-if="contentStatus" @click="contentStatus=!contentStatus">
+              <span style="font-size:12px;">展开阅读全文</span>
+            </div>
           </div>
           <div class="all-comment-box shadow">
-            <h3>全部评论</h3>
+            <h3>全部评论: {{commentList.length}}条</h3>
             <span v-if="commentList.length == 0" style="font-size:12px;color:#A2A0A0;">暂无评论</span>
             <div class="all-comment-list-box" v-for="(comment,cIndex) in commentList" :key="cIndex">
               <div class="app-row-start-left">
@@ -179,7 +183,10 @@ export default {
       replyContent:'',
       parentId:'',
       i: -1,
-      timer: null
+      timer: null,
+      contentStatus:false,  
+      curHeight:0,
+      bodyHeight:300
     }
   },
   
@@ -191,6 +198,9 @@ export default {
   },
 
   mounted () {
+    setTimeout(()=>{
+      this.contentToggle();
+    },500)
     window.addEventListener('scroll', this.scrollToTop)
   },
   destroyed () {
@@ -210,6 +220,16 @@ export default {
     this.show = false
   },
   methods: {
+    //加载全部
+    contentToggle(){
+        this.curHeight = this.$refs.bodyFont.offsetHeight;
+        if(this.curHeight > this.bodyHeight){
+          this.contentStatus = true;
+        }else{
+          this.contentStatus = false;
+        }
+      },
+
     //获取文章信息
     getArticle(id) {
       getArticle(id).then((res) => {
@@ -375,15 +395,39 @@ export default {
     margin:0 10px;
   }
 
+  /* 加载全部 */
+  .bodyFont{
+    color: #333;
+    text-align: left;
+    word-break:break-all;
+    word-wrap:break-word;
+    padding-bottom: 30px;
+    overflow: hidden;
+    max-height: 100%;
+  }
+  .bodyHeight{
+    height: 300px;
+  }
+  .contentToggle{
+    line-height: 35px;
+    text-align: center;
+    background: #fff;
+    color: #E80808;
+    border:1px solid #E80808;
+    border-radius: 5px;
+    margin: 20px 20px;
+    cursor:pointer;
+  }
+  
+  /* 富文本样式 */
   .center-left-item-box >>> img {
     display: block;
     margin: 0 auto;
     width:100% !important;
     height: auto !important;
   }
-
   .center-left-item-box >>> pre{
-    max-width: 100%;
+    max-width: 600px;
     padding: 20px;
     background: #F5F5F5;
     border: 1px solid #CCCCCC;
@@ -392,17 +436,14 @@ export default {
     font-size: 12px !important;
     overflow-x: auto;
   }
-
   .center-left-item-box >>> code{
     max-width: 100%;
     word-break: break-all;
     font-size: 12px !important;
   }
-
   .center-left-item-box >>> code span{
     font-size: 12px !important;
   }
-
   .center-left-item-box >>> table{
     max-width: 100%;
   }
