@@ -186,11 +186,7 @@
   }
   /* 回复子栏 */
   .reply-comment-item-box{
-    background:#F6F6F6;
-    padding:20px;
-    margin-top:20px;
     border-radius:5px;
-    border:1px solid #eee;
     font-family:微软雅黑;
     font-size:14px;
   }

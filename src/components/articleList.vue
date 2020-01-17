@@ -78,7 +78,6 @@ export default {
   //变量定义
   data () {
     return {
-      
       articleList: [],
       articleRandList: [],
       categoryList: []

@@ -39,6 +39,13 @@ const links = (resolve) => {
   })
 }
 
+//github回调界面
+const loginCallback = (resolve) => {
+  import('../components/github').then((module) => {
+    resolve(module)
+  })
+}
+
 export default new Router({
   routes: [
     {
@@ -74,8 +81,16 @@ export default new Router({
       path: '/links',
       component: links,
       props: true
+    },
+    {
+      name: 'loginCallback',
+      path: '/loginCallback',
+      component: loginCallback,
+      props: true
     }
   ],
+  mode: 'history',
+  
   
   // 跳转页面回顶部
   scrollBehavior (to, from, savedPosition) {

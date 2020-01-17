@@ -111,7 +111,7 @@ export default {
     //获取文章信息
     blogIndex() {
       blogIndex().then((res) => {
-        console.log(res)
+        console.log('index: ' + res)
         this.articleList = res.data
       })
       this.btnVisible = true

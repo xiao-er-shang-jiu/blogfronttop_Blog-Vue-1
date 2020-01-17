@@ -40,7 +40,10 @@
             </div>
           </div>
           <div class="all-comment-box shadow">
-            <h3>全部评论: {{commentList.length}}条</h3>
+            <div class="app-row-start-left">
+              <h3>全部评论: </h3>
+              <span style="margin-left:10px;color:#333333;">{{commentList.length}} 条</span>
+            </div>
             <span v-if="commentList.length == 0" style="font-size:12px;color:#A2A0A0;">暂无评论</span>
             <div class="all-comment-list-box" v-for="(comment,cIndex) in commentList" :key="cIndex">
               <div class="app-row-start-left">
@@ -82,18 +85,8 @@
               </div>
               <!--回复评论栏-->
               <div v-show="cIndex==i" class="reply-comment-item-box shadow">
-                <div class="app-row-start-left">
-                  <div class="app-column-start-left">
-                    <label class="send-name"><span style="color:#F56C6C;">*</span>昵称</label>
-                    <el-input class="send-name-input" v-model="replyName" placeholder="请输入一个称呼"></el-input>
-                  </div>
-                  <div class="send-email-box app-column-start-left">
-                    <label>邮箱</label>
-                    <el-input class="send-name-input" v-model="replyEmail" placeholder="邮箱信息绝对保密"></el-input>
-                  </div>
-                </div>
                 <div class="top-gap app-column-center-layout">
-                  <el-input style="font-family:'微软雅黑';" type="textarea" :rows="6" placeholder="说点什么吧..." v-model="replyContent"> </el-input>
+                  <el-input style="font-family:'微软雅黑';" type="textarea" :rows="3" placeholder="说点什么吧..." v-model="replyContent"> </el-input>
                 </div>
                 <div class="top-gap app-row-end-right">
                   <el-button @click="reply(comment.id)" type="primary">发表评论</el-button>
@@ -104,18 +97,8 @@
           <div class="send-comment-box shadow">
             <h3>发表评论</h3>
             <form id="submitForm">
-              <div class="app-row-start-left">
-                <div class="app-column-start-left">
-                  <label class="send-name"><span style="color:#F56C6C;">*</span>昵称</label>
-                  <el-input class="send-name-input" v-model="name" placeholder="请输入一个称呼"></el-input>
-                </div>
-                <div class="send-email-box app-column-start-left">
-                  <label>邮箱</label>
-                  <el-input class="send-name-input" v-model="email" placeholder="邮箱信息绝对保密"></el-input>
-                </div>
-              </div>
               <div class="top-gap app-column-center-layout">
-                <el-input style="font-family:微软雅黑;" type="textarea" :rows="6" placeholder="说点什么吧..." v-model="content"> </el-input>
+                <el-input style="font-family:微软雅黑;" type="textarea" :rows="4" placeholder="说点什么吧..." v-model="content"> </el-input>
               </div>
               <div class="top-gap app-row-end-right">
                 <el-button @click="send()" type="primary">发表评论</el-button>
@@ -129,9 +112,6 @@
             <h3>随机文章</h3>
             <div class="right-top-box-item" v-for="(item,index) in articleRandList" :key="index">
               <img @click="routerTo(item.id)" class="article-list-right-img" :src="item.img" /> 
-              <!-- <div class="right-top-box-item-title">
-                <h5>{{item.title}}</h5>
-              </div> -->
             </div>
           </div>
           <div class="right-bottom-box shadow">
@@ -170,18 +150,20 @@ export default {
   //变量定义
   data () {
     return {
+      name:'',
+      avatarUrl:'',
+      email:'',
+      content:'',
+      replyName:'',
+      replyAvatarUrl:'',
+      replyEmail:'',
+      replyContent:'',
+      parentId:'',
       show: false,
       article: {},
       articleRandList: [],
       categoryList: [],
       commentList:[],
-      name:'',
-      email:'',
-      content:'',
-      replyName:'',
-      replyEmail:'',
-      replyContent:'',
-      parentId:'',
       i: -1,
       timer: null,
       contentStatus:false,  
@@ -273,38 +255,42 @@ export default {
 
     //发表评论
     send(){
-      const loading = this.$loading({
-        lock: true,
-        text: 'Loading',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
-      });
-      var name = this.name
-      var content = this.content
-      if(name != "" && content != ""){
-        var form = {
-          name: name,
-          email: this.email || '',
-          content: content,
-          articleId: this.$route.params.id
-        }
-        postComment(form).then((res) => {
-          //console.log('回复返回值: ' + res)
-          if(res.code == 200){
-            this.successPop(res.msg)
-          } else {
-            this.errorPop(res)
+      const userinfo = localStorage.getItem('userinfo')
+      if(userinfo){
+        var user = JSON.parse(userinfo)
+        if(user.name != "" && this.content != ""){
+          const loading = this.$loading({
+            lock: true,
+            text: 'Loading',
+            spinner: 'el-icon-loading',
+            background: 'rgba(0, 0, 0, 0.7)'
+          });
+          console.log(user.avatar_url)
+
+          var form = {
+            name: user.name,
+            email: user.email,
+            avatarUrl: user.avatar_url,
+            content: this.content,
+            articleId: this.$route.params.id
           }
-          clearTimeout(this.timer);       //清除延迟执行
-          this.timer = setTimeout(()=>{   //设置延迟执行
-            this.reload()
-            loading.close();
-          },1500);
-        })
-      } else if(name == ""){
-        this.$message.error('请输入昵称信息')
-      } else if(content == ""){
-        this.$message.error('请输入评论信息')
+          postComment(form).then((res) => {
+            if(res.code == 200){
+              this.successPop(res.msg)
+            } else {
+              this.errorPop(res)
+            }
+            clearTimeout(this.timer);       //清除延迟执行
+            this.timer = setTimeout(()=>{   //设置延迟执行
+              this.reload()
+              loading.close();
+            },1500);
+          })
+        } else if(this.content == ""){
+          this.$message.error('说点什么吧!')
+        }
+      } else {
+        this.$message.error('请登录!')
       }
     },
 
@@ -315,40 +301,43 @@ export default {
 
     //回复评论
     reply(id){
-      const loading = this.$loading({
-        lock: true,
-        text: 'Loading',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
-      });
-      var name = this.replyName
-      var content = this.replyContent
-      if(name != "" && content != ""){
-        var form = {
-          name: name,
-          email: this.replyEmail || '',
-          content: content,
-          articleId: this.$route.params.id,
-          parentId: id
-        }
-        replyComment(form).then((res) => {
-          //console.log('回复返回值: ' + res)
-          if(res.code == 200){
-            this.successPop(res.msg)
-          } else {
-            this.errorPop(res)
+      const userinfo = localStorage.getItem('userinfo')
+      if(userinfo){
+        var user = JSON.parse(userinfo)
+        if(user.name != "" && this.replyContent != ""){
+          const loading = this.$loading({
+            lock: true,
+            text: 'Loading',
+            spinner: 'el-icon-loading',
+            background: 'rgba(0, 0, 0, 0.7)'
+          });
+
+          var form = {
+            name: user.name,
+            email: user.email,
+            avatarUrl: user.avatar_url,
+            content: this.replyContent,
+            articleId: this.$route.params.id,
+            parentId: id
           }
-          clearTimeout(this.timer);       //清除延迟执行
-          this.timer = setTimeout(()=>{   //设置延迟执行
-            this.reload()
-            loading.close();
-            this.i = -1
-          },1500);
-        })
-      } else if(name == ""){
-        this.$message.error('请输入昵称信息')
-      } else if(content == ""){
-        this.$message.error('请输入评论信息')
+          replyComment(form).then((res) => {
+            if(res.code == 200){
+              this.successPop(res.msg)
+            } else {
+              this.errorPop(res)
+            }
+            clearTimeout(this.timer);       //清除延迟执行
+            this.timer = setTimeout(()=>{   //设置延迟执行
+              this.reload()
+              loading.close();
+              this.i = -1
+            },1500);
+          })
+        } else if(this.replyContent == ""){
+          this.$message.error('说点什么吧!')
+        }
+      } else {
+        this.$message.error('请登录!')
       }
     },
 

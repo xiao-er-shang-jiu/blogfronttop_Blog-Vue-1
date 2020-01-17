@@ -2,8 +2,9 @@
  * 配置参考:
  * https://cli.vuejs.org/zh/config/
  */
-const url = 'http://39.106.89.216:8888'
-//const url = 'http://127.0.0.1:8888'
+//const url = 'http://39.106.89.216:8888'
+const url = 'http://127.0.0.1:8888'
+const githubURL = 'https://www.github.com'
 module.exports = {
   lintOnSave: true,
   productionSourceMap: false,
@@ -18,6 +19,14 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
+        }
+      },
+      '/github': {
+        target: githubURL,
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/github': ''
         }
       }
     }
