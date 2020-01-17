@@ -14,7 +14,7 @@
               <img class="menu-avg" src="../assets/avg.jpg" />
             </div>
             
-            <div style="height:450px;;width:100%;" class="app-column-between-layout">
+            <div style="height:400px;;width:100%;" class="app-column-between-layout">
               <router-link class="menu-router-box" to="/">
                 <div class="app-column-center-layout">
                   <i class="el-icon-house"></i>
@@ -39,9 +39,9 @@
                   <li>友链</li>
                 </div>
               </router-link>
-              <div v-if="flag == 1" @click="loginOut()" style="margin-top:50px;cursor:pointer" class="app-column-center-layout">
+              <div v-if="flag==1" @click="loginOut()" style="margin-top:50px;cursor:pointer" class="app-column-center-layout">
                 <li><img style="width:35px;border-radius:50%;" :src="userinfo.avatar_url" /></li>
-                <li><span style="font-size:12px;color:#1E1E1E;margin-top:10px;">{{userinfo.name}}</span></li>
+                <li><span style="font-size:14px;color:#15800E;margin-top:10px;">{{userinfo.name}}</span></li>
               </div>
               <div v-else @click="login()" style="margin-top:50px;cursor:pointer" class="app-column-center-layout">
                 <li><img style="width:35px;border-radius:50%;" src="../assets/github.jpg" /></li>
@@ -93,7 +93,7 @@
         //保存当前页面路由
         localStorage.setItem("currentRoute",this.$route.path)
         //github请求code
-        const url = '/github/login/oauth/authorize?client_id=6f44473f8efbb96f16fc&redirect_uri=http://localhost:8080/loginCallback'
+        const url = '/github/login/oauth/authorize?client_id=6f44473f8efbb96f16fc&redirect_uri=http://blog.ivan.group/loginCallback'
         //路径跳转
         window.location.href = url
       },
@@ -172,9 +172,9 @@
     list-style none
     font-size 14px
   .menu-avg
-    width 35px
-    height 35px
-    border 3px solid #1E1E1E
+    width 30px
+    height 30px
+    border 2px solid #1E1E1E
     padding 5px
     border-radius 50%
     margin 0px 10px 0px 10px
