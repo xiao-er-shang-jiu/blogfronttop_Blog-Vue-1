@@ -39,13 +39,30 @@ export function replyComment(form) {
 export function getCommentList(form) {
     const url = '/api/blog/getCommentList'
     
-    const articleId = form
+    const articleId = form.id
+    const current = form.current
+    const size = form.size
 
     return axios.get(url,{params: {
-        articleId
+        articleId,current,size
     }}).then((res) => {
         return Promise.resolve(res.data)
     }).catch(function(response) {
         console.log(response)
+    })
+}
+export function getCommentListPage(form) {
+    const url = '/api/blog/getCommentList'
+    
+    const articleId = form.id
+    const current = form.current
+    const size = form.size
+
+    return axios.get(url,{params: {
+        articleId,current,size
+    }}).then((res2) => {
+        return Promise.resolve(res2.data)
+    }).catch(function(response2) {
+        console.log(response2)
     })
 }

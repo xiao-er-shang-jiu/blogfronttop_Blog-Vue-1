@@ -42,12 +42,12 @@
           <div class="all-comment-box shadow">
             <div class="app-row-start-left">
               <h3>全部评论: </h3>
-              <span style="margin-left:10px;color:#333333;">{{commentList.length}} 条</span>
+              <span style="margin-left:10px;color:#333333;">{{page.total}} 条</span>
             </div>
             <span v-if="commentList.length == 0" style="font-size:12px;color:#A2A0A0;">暂无评论</span>
             <div class="all-comment-list-box" v-for="(comment,cIndex) in commentList" :key="cIndex">
               <div class="app-row-start-left">
-                <img class="comment-avatar" src="../assets/user.jpg" />
+                <img class="comment-avatar" :src="comment.avatarUrl" />
                 <div class="app-column-start-left">
                   <div>
                     <span class="comment-name">{{comment.name}}</span>
@@ -64,7 +64,7 @@
               <!--回复信息展示-->
               <div class="reply-comment-box" v-for="(childs,csIndex) in comment.blogCommentList" :key="csIndex">
                 <div class="app-row-start-left">
-                  <img class="comment-avatar" src="../assets/user.jpg" />
+                  <img class="comment-avatar" :src="childs.avatarUrl" />
                   <div class="app-column-start-left">
                     <div>
                       <span class="comment-name">{{childs.name}}</span>
@@ -92,6 +92,17 @@
                   <el-button @click="reply(comment.id)" type="primary">发表评论</el-button>
                 </div>
               </div>
+            </div>
+            <!-- 分页栏 -->
+            <div style="margin-top:20px;" class="app-column-center-layout">
+              <el-pagination 
+                @current-change="handleCurrentChange"
+                @prev-click="prevClick"
+                @next-click="nextClick" 
+                small 
+                layout="prev, pager, next" 
+                :total="page.total">
+              </el-pagination>
             </div>
           </div>
           <div class="send-comment-box shadow">
@@ -139,7 +150,7 @@
 <script>
 import { getArticle,getListByRand } from '../api/blog/article.js'
 import { getCategoryList } from '../api/blog/category.js'
-import { postComment,replyComment,getCommentList } from '../api/blog/comment.js'
+import { postComment,replyComment,getCommentList,getCommentListPage } from '../api/blog/comment.js'
 export default {
   name: '',
   props: {
@@ -164,11 +175,13 @@ export default {
       articleRandList: [],
       categoryList: [],
       commentList:[],
+      page:{},
       i: -1,
       timer: null,
       contentStatus:false,  
       curHeight:0,
-      bodyHeight:300
+      bodyHeight:300,
+      size: 10
     }
   },
   
@@ -192,10 +205,15 @@ export default {
   //页面加载时
   created() {
     var id = this.$route.params.id
+    var form = {
+      id: id,
+      current: 0,
+      size: this.size
+    }
     this.getArticle(id)
     this.getListByRand()
     this.getCategoryList()
-    this.getCommentList(id)
+    this.getCommentList(form)
   },
   //页面离开时销毁
   beforeDestroy() {
@@ -342,11 +360,52 @@ export default {
     },
 
     //获取评论数据列表
-    getCommentList(id){
-      getCommentList(id).then((res) => {
-        this.commentList = res.data
+    getCommentList(form){
+      getCommentList(form).then((res) => {
+        this.page = res.data
+        this.commentList = res.data.records
+        //console.log('评论列表: ' + JSON.stringify(res.data))
       })
     },
+
+    //分页--页数发生改变时
+    handleCurrentChange(val){
+      var form = {
+        id: this.$route.params.id,
+        current: val,
+        size: this.size
+      }
+      //重新查询评论列表数据
+      getCommentList(form).then((res) => {
+        this.commentList = res.data.records
+      })
+    },
+
+    prevClick(val){
+      var form = {
+        id: this.$route.params.id,
+        current: val,
+        size: this.size
+      }
+      //重新查询评论列表数据
+      getCommentList(form).then((res) => {
+        this.commentList = res.data.records
+      })
+    },
+
+    nextClick(val){
+      var form = {
+        id: this.$route.params.id,
+        current: val,
+        size: this.size
+      }
+      //重新查询评论列表数据
+      getCommentList(form).then((res) => {
+        this.commentList = res.data.records
+      })
+    },
+
+
 
     //成功侧移弹框
     successPop(res){
