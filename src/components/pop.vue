@@ -1,9 +1,12 @@
 <template>
-    <div>
+    <div id="menu">
       <el-tooltip class="item" effect="dark" content="点击展开" placement="bottom">
-        <div @click="drawer=true" class="menu-btn">
-          <i style="color:#eee;" class="el-icon-s-unfold"></i>
-        </div>
+        <transition name="el-fade-in-linear">
+          <div @click="drawer=true" class="menu-btn">
+            <i style="color:#eee;" class="el-icon-s-unfold"></i>
+            <span class="menu-font" style="color:#fff;">MENU</span>
+          </div>
+        </transition>
       </el-tooltip>
 
       <el-drawer title="右侧菜单" size="150px"
@@ -158,8 +161,8 @@
   a hover
     text-decoration none
   .menu-btn
-    position fixed
-    right 0px
+    position absolute
+    right 20px
     top 20px
     z-index 30
     padding 12px 15px 12px 15px
@@ -187,6 +190,16 @@
   .menu-router-box:hover 
     background #eee
     
+@media screen and (max-width: 750px)
+  .menu-btn
+    position absolute
+    right 0px
+    top 20px
+    z-index 30
+    padding 12px 15px 12px 15px
+    border 1px solid rgba(255,255,255,0.6)
+    background #333333
+    cursor pointer
 </style>
 
 <style>

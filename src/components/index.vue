@@ -26,7 +26,7 @@
           <header class="header header--index" style="overflow:hidden;width:100%;">
             <div class="wrapper header__title">
                 <div style="height:100px;" class="app-column-between-layout">
-                  <h2 class="header__desc mobile-center-title">Ivan | 晏飞的个人博客</h2>
+                  <h2 class="header__desc mobile-center-title">Ivan | 晏飞个人博客</h2>
                   <span class="header__desc article-title">It's more important to go far than to go fast</span>
                 </div>
                 <transition name="el-fade-in-linear">

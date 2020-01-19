@@ -5,7 +5,7 @@
       <router-link class="router-link-active" to="/">
         <div class="app-row-center-layout">
             <img class="top-logo" src="../assets/avg.jpg" />
-            <h2 style="color:#eee;">Ivan | 晏飞的个人博客</h2>
+            <h2 style="color:#eee;">Ivan | 晏飞个人博客</h2>
         </div>
       </router-link>
     </div>
@@ -381,6 +381,7 @@ export default {
       })
     },
 
+    //上一页
     prevClick(val){
       var form = {
         id: this.$route.params.id,
@@ -393,6 +394,7 @@ export default {
       })
     },
 
+    //下一页
     nextClick(val){
       var form = {
         id: this.$route.params.id,
@@ -475,7 +477,7 @@ export default {
     height: auto !important;
   }
   .center-left-item-box >>> pre{
-    max-width: 600px;
+    max-width: 750px;
     padding: 20px;
     background: #F5F5F5;
     border: 1px solid #CCCCCC;

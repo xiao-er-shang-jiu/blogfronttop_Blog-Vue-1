@@ -1,6 +1,6 @@
 <template>
   <div style="height:300px;" class="app-column-center-layout">
-    <span>登录中..正在进行页面跳转..</span>
+    <span>登录中..正在跳转回当前页面..</span>
   </div>
 </template>
 

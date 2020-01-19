@@ -5,7 +5,7 @@
       <router-link class="router-link-active" to="/">
         <div class="app-row-center-layout">
             <img class="top-logo" src="../assets/avg.jpg" />
-            <h2 style="color:#eee;">Ivan | 晏飞的个人博客</h2>
+            <h2 style="color:#eee;">Ivan | 晏飞个人博客</h2>
         </div>
       </router-link>
     </div>
@@ -62,18 +62,55 @@
               </span> -->
             </div>
           </div>
-          <!--经历介绍-->
+          <!-- 博客搭建过程描述 -->
           <div style="margin-top:50px;" class="about-top-box">
-            <h3>工作经历</h3>
-            <div style="padding:20px;height:450px;">
-              <el-steps direction="vertical" :active="3">
-                <el-step title="2017年03月~2017年11月" description="武汉三仁融信数据服务有限公司" />
-                <el-step title="2017年11月~2019年03月" description="武汉云维时代信息技术有限公司" />
-                <el-step title="2019年03月~2019年09月" description="武汉启恒智互联科技有限公司" />
-                <el-step title="2019年09月~至今" description="武汉邻盛智能科技有限公司" />
-                <el-step title="未来待续" description="未来是一段很长很长很长的旅程"></el-step>
-              </el-steps>
-            </div>
+            <h3>搭建过程</h3>
+          </div>
+          <div style="width:100%;" class="block app-column-center-layout">
+            <el-timeline>
+              <el-timeline-item timestamp="2019/12/28" placement="top">
+                <el-card>
+                  <h4>博客上线</h4>
+                  <p>参照友链中"我没有三颗心脏"提供的博客素材, 搭建了第一版的博客界面...</p>
+                </el-card>
+              </el-timeline-item>
+              <el-timeline-item timestamp="2019/01/02" placement="top">
+                <el-card>
+                  <h4>新增滑动菜单</h4>
+                  <p>修改了最初版的顶部横向导航栏, 改为右侧动态滑动菜单栏...</p>
+                </el-card>
+              </el-timeline-item>
+              <el-timeline-item timestamp="2020/01/04" placement="top">
+                <el-card>
+                  <h4>新增评论</h4>
+                  <p>文章详情界面新增评论展示和评论发表, 回复功能</p>
+                </el-card>
+              </el-timeline-item>
+              <el-timeline-item timestamp="2020/01/08" placement="top">
+                <el-card>
+                  <h4>移动端自适应</h4>
+                  <p>针对绝大部分时候网站会通过移动端进行访问, 做了移动端兼容处理...</p>
+                </el-card>
+              </el-timeline-item>
+              <el-timeline-item timestamp="2020/01/12" placement="top">
+                <el-card>
+                  <h4>新增动效及整体样式完善</h4>
+                  <p>为了让博客整体看上去效果更好, 加入了部分动态效果...</p>
+                </el-card>
+              </el-timeline-item>
+              <el-timeline-item timestamp="2020/01/16" placement="top">
+                <el-card>
+                  <h4>新增github登录</h4>
+                  <p>登录还是不能少的...</p>
+                </el-card>
+              </el-timeline-item>
+              <el-timeline-item timestamp="2020/01/18" placement="top">
+                <el-card>
+                  <h4>新增评论分页</h4>
+                  <p>评论数据展示栏加入分页, 保证数据量过大时不会影响到性能...</p>
+                </el-card>
+              </el-timeline-item>
+            </el-timeline>
           </div>
         </div>
         <!--右侧部分-->
@@ -194,11 +231,24 @@ export default {
     float: left;
     margin:0 10px;
   }
+  p {
+    margin-top: 10px;
+    color: #555;
+    font-size: 12px;
+  }
   .qq-group{
     display: flex;
     flex-direction: row;
     align-items: center;
     line-height: 12px;
   }
+  .block ul{
+    width: 90%;
+  }
+  .block ul li{
+    width: 100%;
+  }
+
+
 
 </style>

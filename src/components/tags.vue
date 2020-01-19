@@ -5,7 +5,7 @@
       <router-link class="router-link-active" to="/">
         <div class="app-row-center-layout">
             <img class="top-logo" src="../assets/avg.jpg" />
-            <h2 style="color:#eee;">Ivan | 晏飞的个人博客</h2>
+            <h2 style="color:#eee;">Ivan | 晏飞个人博客</h2>
         </div>
       </router-link>
     </div>
@@ -23,7 +23,7 @@
           <div v-for="(article,aIndex) in articleList" :key="aIndex">
             <div @click="routerTo(article.id)" class="article-list-left-box app-column-start-left shadow">
               <img class="article-list-left-img" :src="article.img" />
-              <h3 class="article-list-left-title text-two-line-omit">{{article.title}}</h3>
+              <span class="base-title text-two-line-omit">{{article.title}}</span>
               <div class="article-list-left-summary text-two-line-omit">{{article.summary}}</div>
               <div class="posts-default-info">
                 <span><i class="el-icon-user-solid"></i> Ivan</span>
@@ -37,13 +37,13 @@
         <!--右侧部分-->
         <div class="right-box">
           <div class="right-top-box shadow">
-            <h3>随机文章</h3>
+            <span class="base-title">随机文章</span>
             <div class="right-top-box-item" v-for="(item,index) in articleRandList" :key="index">
               <img @click="routerTo(item.id)" class="article-list-right-img" :src="item.img" /> 
             </div>
           </div>
           <div class="right-bottom-box shadow">
-            <h3>热门标签</h3>
+            <span class="base-title">热门标签</span>
             <div class="category-box">
               <span @click="routerToTags(category.id)" class="category-name" v-for="(category,cIndex) in categoryList" :key="cIndex">{{category.name}}</span>
             </div>
