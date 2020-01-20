@@ -86,14 +86,14 @@
     cursor:pointer;
   }
   .article-list-left-img{
-    height:350px;
+    height:332px;
   }
   .article-list-left-img:hover{
     opacity: 0.8;
     transition: all .5s ease;
   }
   .article-list-right-img{
-    height:156px;
+    height:150px;
     width:100%;
     cursor:pointer;
   }
@@ -129,11 +129,46 @@
     font-family: -webkit-pictograph;
   }
   .content-item{
-    background:#fff;
-    padding:20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #fff;
+    padding: 10px 20px 10px 20px;
+    height: 85px;
   }
-  .content-item h2{
-    padding: 10px 0px 10px 0px;
+  /* 文章分享 */
+  .share-box{
+    padding: 20px 20px 20px 20px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: #eee;
+  }
+  .share-img{
+    width: 25px;
+    height: 25px;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+  /* 前后篇幅文章 */
+  .router-article-box{
+    padding: 10px 20px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    height: 40px;
+    justify-content: space-between;
+  }
+  .router-article{
+    cursor: pointer;
+    font-size: 12px;
+    color: #39393B;
+  }
+  .router-article:hover{
+    cursor: pointer;
+    font-size: 12px;
+    color: #40AAFF;
   }
   .season{
     border-bottom:1px solid #E7E7E7;
@@ -281,6 +316,7 @@
     border-bottom:1px solid #eee;
     background:#fff;
     margin:20px;
+    height: 30px;
   }
   .about-top-item-box{
     background:#fff;
@@ -306,7 +342,7 @@
 
   .about-top-info-box{
     width:100%;
-    font-size:14px;
+    font-size:12px;
     color:#4D4D4D;
     display:flex;
     flex-direction:column;
@@ -314,7 +350,7 @@
     border-bottom:1px solid #eee;
     margin:0px 0px 0px 20px;
     padding-bottom:10px;
-    line-height:30px;
+    line-height:32px;
   }
   .about-data-label{
     font-weight:bold;
@@ -361,16 +397,16 @@
   .link-img{
     width: 35px;
     height: 35px;
-    border-radius: 50%;
   }
   .link-name{
     margin-top: 10px;
     font-size: 12px;
     color:#0AA2F2;
     text-decoration: none;
+    line-height: 2;
   }
   .link-title-box{
-    height:40px;
+    height:50px;
     border-bottom:1px solid #eee;
   }
   .link-box{
@@ -436,10 +472,6 @@
     .content-box{
       width: 100%;
     }
-    .content-item h2{
-      padding: 10px 0px 10px 0px;
-      font-size: 18px;
-    }
     .reply-comment-box div img{
       width: 25px;
       height: 25px;
@@ -467,11 +499,20 @@
     .article-list-left-summary{
       font-size: 12px;
     }
+    .content-item{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #fff;
+      padding: 10px 20px 10px 20px;
+      height: 100px;
+    }
     .about-box{
       width: 100%;
     }
     .about-top-info-box{
       font-size: 12px;
+      line-height: 24px;
     }
     .about-top-item{
       width: 150px;

@@ -1,8 +1,8 @@
+<!--回到顶部-->
 <template>
-    <!--回到顶部-->
     <transition name="el-fade-in">
         <div v-if="btnFlag" class="go-top-box app-column-center-layout" @click="backTop">
-            <img class="go-top-img" src="../assets/goTop.jpg">
+            <img class="go-top-img" src="../../assets/goTop.jpg">
         </div>
     </transition>
 </template>

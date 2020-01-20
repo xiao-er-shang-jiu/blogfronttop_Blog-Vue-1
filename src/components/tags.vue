@@ -1,15 +1,5 @@
 <template>
   <div>
-    <!--顶部-->
-    <div class="top-box app-row-start-layout shadow">
-      <router-link class="router-link-active" to="/">
-        <div class="app-row-center-layout">
-            <img class="top-logo" src="../assets/avg.jpg" />
-            <h2 style="color:#eee;">Ivan | 晏飞个人博客</h2>
-        </div>
-      </router-link>
-    </div>
-
     <!--中部-->
     <div class="center app-column-center-layout shadow">
       <div class="center-box">
@@ -37,7 +27,7 @@
         <!--右侧部分-->
         <div class="right-box">
           <div class="right-top-box shadow">
-            <span class="base-title">随机文章</span>
+            <span class="base-title">推荐文章</span>
             <div class="right-top-box-item" v-for="(item,index) in articleRandList" :key="index">
               <img @click="routerTo(item.id)" class="article-list-right-img" :src="item.img" /> 
             </div>
@@ -50,16 +40,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <!--底部-->
-    <div class="bottom-box app-column-start-left">
-        <label class="bottom-title">
-            <span class="footer__heart">❤️</span>
-            Copyright © 2019 All Rights Reserved.  Ivan Personal Blog
-        </label>
-        <label class="bottom-Record">
-            <a style="color:#828282;" target="_blank" href="http://www.beian.miit.gov.cn/">鄂ICP备19026210号</a>
-        </label>
     </div>
   </div>
 </template>

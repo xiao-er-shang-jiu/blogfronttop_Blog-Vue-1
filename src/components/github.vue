@@ -23,13 +23,18 @@
         getToken(code).then((res) => {
           var that = this
           if(res.code == 200){
+            this.$message({
+              type: 'success',
+              center: true,
+              message: res.data.name + ', 登录成功!'
+            });
             //跳转回之前的路由路径
             var path = localStorage.getItem("currentRoute")
             //保存用户信息
             localStorage.setItem('userinfo',res.data)
             that.$router.push(path);
             clearTimeout(this.timer);         //清除延迟执行
-              this.timer = setTimeout(()=>{   //设置延迟执行
+            this.timer = setTimeout(()=>{     //设置延迟执行
               location.reload()
             },500);
           }

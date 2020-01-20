@@ -1,20 +1,19 @@
+<!--菜单-->
 <template>
     <div id="menu">
-      <el-tooltip class="item" effect="dark" content="点击展开" placement="bottom">
-        <transition name="el-fade-in-linear">
-          <div @click="drawer=true" class="menu-btn">
-            <i style="color:#eee;" class="el-icon-s-unfold"></i>
-            <span class="menu-font" style="color:#fff;">MENU</span>
-          </div>
-        </transition>
-      </el-tooltip>
+      <transition name="el-fade-in-linear">
+        <div @click="drawer=true" class="menu-btn">
+          <i style="color:#eee;" class="el-icon-s-unfold"></i>
+          <span class="menu-font" style="color:#fff;">MENU</span>
+        </div>
+      </transition>
 
       <el-drawer title="右侧菜单" size="150px"
         :visible.sync="drawer" 
         :with-header="false">
           <ul class="menu-box app-column-start-layout">
-            <div style="height:150px;" class="app-column-center-layout">
-              <img class="menu-avg" src="../assets/avg.jpg" />
+            <div class="menu-avg-box app-column-center-layout">
+              <img class="menu-avg" src="../../assets/avg.jpg" />
             </div>
             
             <div style="height:400px;;width:100%;" class="app-column-between-layout">
@@ -44,10 +43,10 @@
               </router-link>
               <div v-if="flag==1" @click="loginOut()" style="margin-top:50px;cursor:pointer" class="app-column-center-layout">
                 <li><img style="width:35px;border-radius:50%;" :src="userinfo.avatar_url" /></li>
-                <li><span style="font-size:14px;color:#15800E;margin-top:10px;">{{userinfo.name}}</span></li>
+                <li style="font-size:12px;color:#15800E;margin-top:10px;font-weight:bold;">用户: {{userinfo.name}}</li>
               </div>
               <div v-else @click="login()" style="margin-top:50px;cursor:pointer" class="app-column-center-layout">
-                <li><img style="width:35px;border-radius:50%;" src="../assets/github.jpg" /></li>
+                <li><img style="width:35px;border-radius:50%;" src="../../assets/github.jpg" /></li>
                 <li style="font-size:12px;color:#999999;margin-top:10px;">github登录</li>
               </div>
             </div>
@@ -76,13 +75,6 @@
       console.log("userinfo: " + localStorage.getItem("userinfo"))
       var userinfo = localStorage.getItem("userinfo")
       if(userinfo && userinfo != null){
-        var user = JSON.parse(userinfo)
-        //提示用户登录成功
-        this.$message({
-          type: 'success',
-          center: true,
-          message: user.name + ', 登录成功!'
-        });
         this.userinfo = JSON.parse(userinfo)
         this.flag = 1
       } else {
@@ -169,11 +161,12 @@
     border 1px solid rgba(255,255,255,0.6)
     background #333333
     cursor pointer
-    
   .menu-box
     height 100%
     list-style none
     font-size 14px
+  .menu-avg-box
+    height 150px
   .menu-avg
     width 30px
     height 30px
@@ -191,6 +184,8 @@
     background #eee
     
 @media screen and (max-width: 750px)
+  .menu-avg-box
+    height 100px
   .menu-btn
     position absolute
     right 0px

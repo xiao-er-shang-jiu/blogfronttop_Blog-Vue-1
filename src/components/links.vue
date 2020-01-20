@@ -1,15 +1,5 @@
 <template>
   <div>
-    <!--顶部-->
-    <div class="top-box app-row-start-layout shadow">
-      <router-link class="router-link-active" to="/">
-        <div class="app-row-center-layout">
-            <img class="top-logo" src="../assets/avg.jpg" />
-            <h2 style="color:#eee;">Ivan | 晏飞个人博客</h2>
-        </div>
-      </router-link>
-    </div>
-
     <!--中部-->
     <div class="center app-column-center-layout shadow">
       <div style="margin-bottom:5%;" class="center-box">
@@ -22,7 +12,7 @@
           </el-breadcrumb>
           <div style="padding:20px;">
             <div class="link-title-box app-column-start-left">
-              <h3>优质博客</h3>
+              <span class="base-title">优质博客</span>
             </div>
             <div class="link-box">
               <div class="link-item-box app-column-center-layout">
@@ -40,43 +30,31 @@
               <div class="link-item-box app-column-center-layout">
                 <a class="link-name app-column-center-layout" href="https://www.wmyskxz.com/" target="_blank">
                   <img class="link-img" src="../assets/link/wmyskxz.jpg" />
-                  我没有三颗心脏
+                  三颗心脏
                 </a>
               </div>
             </div>
 
             <div style="margin-top:50px;" class="link-title-box app-column-start-left">
-              <h3>精品社区</h3>
+              <span class="base-title">精品社区</span>
             </div>
             <div class="link-box">
               <div class="link-item-box app-column-center-layout">
                 <a class="link-name app-column-center-layout" href="https://www.csdn.net/" target="_blank">
                   <img class="link-img" src="../assets/link/csdn.jpg" />
-                  CSDN
+                  CSDN-专业IT技术社区
                 </a>
               </div>
             </div>
 
             <div style="margin-top:50px;" class="link-title-box app-column-start-left">
-              <h3>推荐网站</h3>
+              <span class="base-title">推荐网站</span>
             </div>
             <div class="link-box">
               <div class="link-item-box app-column-center-layout">
-                <a class="link-name app-column-center-layout" href="https://www.springcloud.cc/" target="_blank">
-                  <img class="link-img" src="../assets/link/springcloud.jpg" />
-                  SpringCloud
-                </a>
-              </div>
-              <div class="link-item-box app-column-center-layout">
                 <a class="link-name app-column-center-layout" href="https://cn.vuejs.org/" target="_blank">
                   <img class="link-img" src="../assets/link/vue.jpg" />
-                  Vue
-                </a>
-              </div>
-              <div class="link-item-box app-column-center-layout">
-                <a class="link-name app-column-center-layout" href="https://element.eleme.cn/" target="_blank">
-                  <img class="link-img" src="../assets/link/element.jpg" />
-                  element
+                  Vue.js
                 </a>
               </div>
             </div>
@@ -85,7 +63,7 @@
         <!--右侧部分-->
         <div class="right-box hidden-xs-only">
           <div class="right-top-box shadow">
-            <h3>随机文章</h3>
+            <span class="base-title">推荐文章</span>
             <div class="right-top-box-item" v-for="(item,index) in articleRandList" :key="index">
               <img @click="routerTo(item.id)" class="article-list-right-img" :src="item.img" /> 
               <!-- <div class="right-top-box-item-title">
@@ -94,23 +72,13 @@
             </div>
           </div>
           <div class="right-bottom-box shadow">
-            <h3>热门标签</h3>
+            <span class="base-title">热门标签</span>
             <div class="category-box">
               <span @click="routerToTags(category.id)" class="category-name" v-for="(category,cIndex) in categoryList" :key="cIndex">{{category.name}}</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <!--底部-->
-    <div class="bottom-box app-column-start-left">
-        <label class="bottom-title">
-            <span class="footer__heart">❤️</span>
-            Copyright © 2019 All Rights Reserved.  Ivan Personal Blog
-        </label>
-        <label class="bottom-Record">
-            <a style="color:#828282;" target="_blank" href="http://www.beian.miit.gov.cn/">鄂ICP备19026210号</a>
-        </label>
     </div>
   </div>
 </template>

@@ -1,15 +1,5 @@
 <template>
   <div>
-    <!--顶部-->
-    <div class="top-box app-row-start-layout shadow">
-      <router-link class="router-link-active" to="/">
-        <div class="app-row-center-layout">
-            <img class="top-logo" src="../assets/avg.jpg" />
-            <h2 style="color:#eee;">Ivan | 晏飞个人博客</h2>
-        </div>
-      </router-link>
-    </div>
-
     <!--中部-->
     <div class="center app-column-center-layout shadow">
       <div class="center-box">
@@ -23,13 +13,13 @@
           </el-breadcrumb>
           <div class="white-bg app-column-start-left">
             <div class="content-item">
-              <h2>{{article.title}}</h2>
+              <span class="base-title">{{article.title}}</span>
               <div class="posts-default-info season">
                 <span><i class="el-icon-user-solid"></i> Ivan</span>
                 <span><i class="el-icon-menu"></i> {{article.category}}</span>
                 <span><i class="el-icon-time"></i> {{article.createTime}}</span>
                 <span><i class="el-icon-view"></i> {{article.traffic}}</span>
-                <span><i class="el-icon-chat-dot-round"></i> {{commentList.length}}</span>
+                <span><i class="el-icon-chat-dot-round"></i> {{page.total}}</span>
               </div>
             </div>
             <transition name="el-fade-in-linear">
@@ -38,11 +28,25 @@
             <div class="contentToggle" v-if="contentStatus" @click="contentStatus=!contentStatus">
               <span style="font-size:12px;">展开阅读全文</span>
             </div>
+            <div class="share-box hidden-xs-only">
+              <span>分享至: </span>
+              <img @click="share('qq')" class="share-img" src="../assets/share/qq.jpg" />
+              <img @click="share('qq-zone')" class="share-img" src="../assets/share/qq_zone.jpg" />
+              <img @click="share('weibo')" class="share-img" src="../assets/share/weibo.jpg" />
+            </div>
+            <div class="router-article-box">
+              <span class="router-article" @click="routerTo(article.beforeArticle.id)" v-if="article.beforeArticle">
+                上一篇 : {{article.beforeArticle.title}}
+              </span>
+              <span class="router-article" @click="routerTo(article.afterArticle.id)" v-if="article.afterArticle">
+                下一篇 : {{article.afterArticle.title}}
+              </span>
+            </div>
           </div>
           <div class="all-comment-box shadow">
             <div class="app-row-start-left">
-              <h3>全部评论: </h3>
-              <span style="margin-left:10px;color:#333333;">{{page.total}} 条</span>
+              <span class="base-title">全部评论:</span>
+              <span style="margin-left:10px;margin-top:10px;color:#333333;">{{page.total}} 条</span>
             </div>
             <span v-if="commentList.length == 0" style="font-size:12px;color:#A2A0A0;">暂无评论</span>
             <div class="all-comment-list-box" v-for="(comment,cIndex) in commentList" :key="cIndex">
@@ -51,10 +55,10 @@
                 <div class="app-column-start-left">
                   <div>
                     <span class="comment-name">{{comment.name}}</span>
-                    <span class="comment-floor">#{{cIndex+1}}楼</span>
+                    <span class="comment-floor">#{{comment.ladder}}楼</span>
                   </div>
                   <div>
-                    <span class="comment-time">{{comment.createTime}}</span>
+                    <span class="comment-time">{{comment.createTime | getTimeFormat}}</span>
                   </div>
                 </div>
               </div>
@@ -71,7 +75,7 @@
                       <span v-if="comment.id == childs.parentId" class="comment-floor">回复 {{comment.name}}</span>
                     </div>
                     <div>
-                      <span class="comment-time">{{childs.createTime}}</span>
+                      <span class="comment-time">{{childs.createTime | getTimeFormat}}</span>
                     </div>
                   </div>
                 </div>
@@ -86,7 +90,7 @@
               <!--回复评论栏-->
               <div v-show="cIndex==i" class="reply-comment-item-box shadow">
                 <div class="top-gap app-column-center-layout">
-                  <el-input style="font-family:'微软雅黑';" type="textarea" :rows="3" placeholder="说点什么吧..." v-model="replyContent"> </el-input>
+                  <el-input style="font-family:'微软雅黑';" type="textarea" :rows="3" :placeholder="'回复: ' + comment.name" v-model="replyContent"> </el-input>
                 </div>
                 <div class="top-gap app-row-end-right">
                   <el-button @click="reply(comment.id)" type="primary">发表评论</el-button>
@@ -106,7 +110,7 @@
             </div>
           </div>
           <div class="send-comment-box shadow">
-            <h3>发表评论</h3>
+            <span class="base-title">发表评论:</span>
             <form id="submitForm">
               <div class="top-gap app-column-center-layout">
                 <el-input style="font-family:微软雅黑;" type="textarea" :rows="4" placeholder="说点什么吧..." v-model="content"> </el-input>
@@ -120,13 +124,13 @@
         <!--右侧部分-->
         <div class="right-box hidden-xs-only">
           <div class="right-top-box shadow">
-            <h3>随机文章</h3>
+            <span class="base-title">推荐文章</span>
             <div class="right-top-box-item" v-for="(item,index) in articleRandList" :key="index">
               <img @click="routerTo(item.id)" class="article-list-right-img" :src="item.img" /> 
             </div>
           </div>
           <div class="right-bottom-box shadow">
-            <h3>热门标签</h3>
+            <span class="base-title">热门标签</span>
             <div class="category-box">
               <span @click="routerToTags(category.id)" class="category-name" v-for="(category,cIndex) in categoryList" :key="cIndex">{{category.name}}</span>
             </div>
@@ -134,20 +138,11 @@
         </div>
       </div>
     </div>
-    <!--底部-->
-    <div class="bottom-box app-column-start-left">
-        <label class="bottom-title">
-            <span class="footer__heart">❤️</span>
-            Copyright © 2019 All Rights Reserved.  Ivan Personal Blog
-        </label>
-        <label class="bottom-Record">
-            <a style="color:#828282;" target="_blank" href="http://www.beian.miit.gov.cn/">鄂ICP备19026210号</a>
-        </label>
-    </div>
   </div>
 </template>
 
 <script>
+//import { qq } from 'http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201'
 import { getArticle,getListByRand } from '../api/blog/article.js'
 import { getCategoryList } from '../api/blog/category.js'
 import { postComment,replyComment,getCommentList,getCommentListPage } from '../api/blog/comment.js'
@@ -180,8 +175,10 @@ export default {
       timer: null,
       contentStatus:false,  
       curHeight:0,
-      bodyHeight:300,
-      size: 10
+      bodyHeight:400,
+      size: 10,
+      ftit: '', // 分享出去得文章得标题
+      flink: '' // 分享出去logo
     }
   },
   
@@ -195,7 +192,7 @@ export default {
   mounted () {
     setTimeout(()=>{
       this.contentToggle();
-    },500)
+    },700)
     window.addEventListener('scroll', this.scrollToTop)
   },
   destroyed () {
@@ -271,6 +268,41 @@ export default {
       });
     },
 
+    //评论测试
+    // sendDev(){
+    //   if(this.content != ""){
+    //     const loading = this.$loading({
+    //       lock: true,
+    //       text: 'Loading',
+    //       spinner: 'el-icon-loading',
+    //       background: 'rgba(0, 0, 0, 0.7)'
+    //     });
+
+    //     var form = {
+    //       name: 'Ivan',
+    //       email: '',
+    //       avatarUrl: '',
+    //       content: this.content,
+    //       articleId: this.$route.params.id,
+    //       parentId: 0
+    //     }
+    //     postComment(form).then((res) => {
+    //       if(res.code == 200){
+    //         this.successPop(res.msg)
+    //       } else {
+    //         this.errorPop(res)
+    //       }
+    //       clearTimeout(this.timer);       //清除延迟执行
+    //       this.timer = setTimeout(()=>{   //设置延迟执行
+    //         this.reload()
+    //         loading.close();
+    //       },1500);
+    //     })
+    //   } else if(this.content == ""){
+    //     this.$message.error('说点什么吧!')
+    //   }
+    // },
+
     //发表评论
     send(){
       const userinfo = localStorage.getItem('userinfo')
@@ -290,7 +322,8 @@ export default {
             email: user.email,
             avatarUrl: user.avatar_url,
             content: this.content,
-            articleId: this.$route.params.id
+            articleId: this.$route.params.id,
+            parentId: 0
           }
           postComment(form).then((res) => {
             if(res.code == 200){
@@ -338,7 +371,7 @@ export default {
             articleId: this.$route.params.id,
             parentId: id
           }
-          replyComment(form).then((res) => {
+          postComment(form).then((res) => {
             if(res.code == 200){
               this.successPop(res.msg)
             } else {
@@ -407,7 +440,20 @@ export default {
       })
     },
 
-
+    //分享
+    share(type){
+      var ftit = this.article.title;  // 分享出去得文章得标题
+      var flink = this.article.img;   // 分享出去logo
+      var summary = this.article.summary
+      console.log('当前网站: ' + ftit)
+      if(type === 'qq'){
+        window.open('http://connect.qq.com/widget/shareqq/index.html?url='+encodeURIComponent(document.location)+'?sharesource=qzone&title='+ftit+'&pics='+flink+'&summary='+summary+'&desc='+'');
+      } else if(type === 'qq-zone'){
+        window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+encodeURIComponent(document.location)+'&sharesource=qzone&title='+ftit+'&desc='+flink+'&summary='+summary+'&site='+'');
+      } else if(type === 'weibo'){
+        window.open('http://service.weibo.com/share/share.php?url='+encodeURIComponent(document.location)+'?sharesource=weibo&title='+ftit+'&pic='+flink+'&appkey=3825954717');
+      } 
+    },
 
     //成功侧移弹框
     successPop(res){
@@ -430,7 +476,48 @@ export default {
         position: 'bottom-right'
       });
     }
-    
+  },
+
+  filters: {
+    //时间戳显示格式为几天前、几分钟前、几秒前
+    getTimeFormat (valueTime) {
+      if (valueTime) {
+        // let newData = Date.parse(new Date() + '')
+        // let diffTime = Math.abs(newData - valueTime)
+        let diffTime = Math.abs(new Date().getTime() - new Date(valueTime).getTime())
+        if (diffTime > 7 * 24 * 3600 * 1000) {
+          let date = new Date(valueTime)
+          // let y = date.getFullYear()
+          let m = date.getMonth() + 1
+          m = m < 10 ? ('0' + m) : m
+          let d = date.getDate()
+          d = d < 10 ? ('0' + d) : d
+          let h = date.getHours()
+          h = h < 10 ? ('0' + h) : h
+          let minute = date.getMinutes()
+          let second = date.getSeconds()
+          console.log(second)
+          minute = minute < 10 ? ('1' + minute) : minute
+          second = second < 10 ? ('0' + second) : second
+          return m + '-' + d + ' ' + h + ':' + minute
+        } else if (diffTime < 7 * 24 * 3600 * 1000 && diffTime > 24 * 3600 * 1000) {
+          // //注释("一周之内");
+          // var time = newData - diffTime;
+          let dayNum = Math.floor(diffTime / (24 * 60 * 60 * 1000))
+          return dayNum + '天前'
+        } else if (diffTime < 24 * 3600 * 1000 && diffTime > 3600 * 1000) {
+          // //注释("一天之内");
+          // var time = newData - diffTime;
+          let dayNum = Math.floor(diffTime / (60 * 60 * 1000))
+          return dayNum + '小时前'
+        } else if (diffTime < 3600 * 1000 && diffTime > 0) {
+          // //注释("一小时之内");
+          // var time = newData - diffTime;
+          let dayNum = Math.floor(diffTime / (60 * 1000))
+          return dayNum + '分钟前'
+        }
+      }
+    }
   }
 }
 </script>
@@ -456,7 +543,7 @@ export default {
     max-height: 100%;
   }
   .bodyHeight{
-    height: 300px;
+    height: 387px;
   }
   .contentToggle{
     line-height: 35px;
@@ -465,7 +552,7 @@ export default {
     color: #E80808;
     border:1px solid #E80808;
     border-radius: 5px;
-    margin: 20px 20px;
+    margin: 0px 20px 20px 20px;
     cursor:pointer;
   }
   

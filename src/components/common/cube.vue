@@ -1,3 +1,4 @@
+<!--方块动效-->
 <template>
     <ul class="bg-bubbles">
         <li v-for="(item, index) in 10" :key="index"></li>

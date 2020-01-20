@@ -1,15 +1,5 @@
 <template>
   <div>
-    <!--顶部-->
-    <div class="top-box app-row-start-layout shadow">
-      <router-link class="router-link-active" to="/">
-        <div class="app-row-center-layout">
-            <img class="top-logo" src="../assets/avg.jpg" />
-            <h2 style="color:#eee;">Ivan | 晏飞个人博客</h2>
-        </div>
-      </router-link>
-    </div>
-
     <!--中部-->
     <div class="center app-column-center-layout shadow">
       <div class="center-box">
@@ -21,7 +11,7 @@
             <el-breadcrumb-item>关于</el-breadcrumb-item>
           </el-breadcrumb>
           <div class="about-top-box">
-            <h3>个人资料</h3>
+            <span class="base-title">个人资料</span>
           </div>
           <div class="about-top-item-box app-row-start-layout">
             <div class="about-top-item">
@@ -64,20 +54,20 @@
           </div>
           <!-- 博客搭建过程描述 -->
           <div style="margin-top:50px;" class="about-top-box">
-            <h3>搭建过程</h3>
+            <span class="base-title">搭建过程</span>
           </div>
           <div style="width:100%;" class="block app-column-center-layout">
             <el-timeline>
               <el-timeline-item timestamp="2019/12/28" placement="top">
                 <el-card>
                   <h4>博客上线</h4>
-                  <p>参照友链中"我没有三颗心脏"提供的博客素材, 搭建了第一版的博客界面...</p>
+                  <p>参照友链三位大神的博客素材, 搭建了第一版的博客界面</p>
                 </el-card>
               </el-timeline-item>
               <el-timeline-item timestamp="2019/01/02" placement="top">
                 <el-card>
                   <h4>新增滑动菜单</h4>
-                  <p>修改了最初版的顶部横向导航栏, 改为右侧动态滑动菜单栏...</p>
+                  <p>修改了最初版的顶部横向导航栏, 改为右侧动态滑动菜单栏</p>
                 </el-card>
               </el-timeline-item>
               <el-timeline-item timestamp="2020/01/04" placement="top">
@@ -89,25 +79,31 @@
               <el-timeline-item timestamp="2020/01/08" placement="top">
                 <el-card>
                   <h4>移动端自适应</h4>
-                  <p>针对绝大部分时候网站会通过移动端进行访问, 做了移动端兼容处理...</p>
+                  <p>针对绝大部分时候网站会通过移动端进行访问, 做了移动端兼容处理</p>
                 </el-card>
               </el-timeline-item>
               <el-timeline-item timestamp="2020/01/12" placement="top">
                 <el-card>
                   <h4>新增动效及整体样式完善</h4>
-                  <p>为了让博客整体看上去效果更好, 加入了部分动态效果...</p>
+                  <p>为了让博客整体看上去效果更好, 加入了部分动态效果</p>
                 </el-card>
               </el-timeline-item>
               <el-timeline-item timestamp="2020/01/16" placement="top">
                 <el-card>
                   <h4>新增github登录</h4>
-                  <p>登录还是不能少的...</p>
+                  <p>登录还是不能少的</p>
                 </el-card>
               </el-timeline-item>
               <el-timeline-item timestamp="2020/01/18" placement="top">
                 <el-card>
                   <h4>新增评论分页</h4>
-                  <p>评论数据展示栏加入分页, 保证数据量过大时不会影响到性能...</p>
+                  <p>评论数据展示栏加入分页, 保证数据量过大时不会影响到性能</p>
+                </el-card>
+              </el-timeline-item>
+              <el-timeline-item timestamp="2020/01/20~至今" placement="top">
+                <el-card>
+                  <h4>优化</h4>
+                  <p>持续优化中...</p>
                 </el-card>
               </el-timeline-item>
             </el-timeline>
@@ -116,7 +112,7 @@
         <!--右侧部分-->
         <div class="right-box hidden-xs-only">
           <div class="right-top-box shadow">
-            <h3>随机文章</h3>
+            <span class="base-title">推荐文章</span>
             <div class="right-top-box-item" v-for="(item,index) in articleRandList" :key="index">
               <img @click="routerTo(item.id)" class="article-list-right-img" :src="item.img" /> 
               <!-- <div class="right-top-box-item-title">
@@ -125,23 +121,13 @@
             </div>
           </div>
           <div class="right-bottom-box shadow">
-            <h3>热门标签</h3>
+            <span class="base-title">热门标签</span>
             <div class="category-box">
               <span @click="routerToTags(category.id)" class="category-name" v-for="(category,cIndex) in categoryList" :key="cIndex">{{category.name}}</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <!--底部-->
-    <div class="bottom-box app-column-start-left">
-        <label class="bottom-title">
-            <span class="footer__heart">❤️</span>
-            Copyright © 2019 All Rights Reserved.  Ivan Personal Blog
-        </label>
-        <label class="bottom-Record">
-            <a style="color:#828282;" target="_blank" href="http://www.beian.miit.gov.cn/">鄂ICP备19026210号</a>
-        </label>
     </div>
   </div>
 </template>
