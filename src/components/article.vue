@@ -543,7 +543,7 @@ export default {
     max-height: 100%;
   }
   .bodyHeight{
-    height: 387px;
+    height: 407px;
   }
   .contentToggle{
     line-height: 35px;
@@ -563,6 +563,22 @@ export default {
     width:100% !important;
     height: auto !important;
   }
+  /* 引用样式 */
+  .center-left-item-box >>> blockquote {
+    position: relative;
+    margin: 20px 0px;
+    padding: .107143rem .878571rem;
+    background: rgba(0,0,0,.02);
+  } 
+  .center-left-item-box >>> blockquote::before{
+    content: "";
+    position: absolute;
+    width: .307143rem;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.06);
+  }
   .center-left-item-box >>> pre{
     max-width: 750px;
     padding: 20px;
@@ -573,6 +589,7 @@ export default {
     font-size: 12px !important;
     overflow-x: auto;
   }
+  /* 代码样式 */
   .center-left-item-box >>> code{
     max-width: 100%;
     word-break: break-all;
@@ -581,7 +598,15 @@ export default {
   .center-left-item-box >>> code span{
     font-size: 12px !important;
   }
+  /* 表单样式 */
   .center-left-item-box >>> table{
     max-width: 100%;
+  }
+  /* 列表样式 */
+  .center-left-item-box >>> ul {
+    margin-left: 40px;
+  }
+  .center-left-item-box >>> ol {
+    margin-left: 40px;
   }
 </style>
