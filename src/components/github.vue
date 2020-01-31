@@ -26,7 +26,7 @@
             this.$message({
               type: 'success',
               center: true,
-              message: res.data.name + ', 登录成功!'
+              message: '登录成功!'
             });
             //跳转回之前的路由路径
             var path = localStorage.getItem("currentRoute")
