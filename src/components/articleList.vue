@@ -13,9 +13,13 @@
           
           <div v-for="(article,aIndex) in articleList" :key="aIndex">
             <div @click="routerTo(article.id)" class="article-list-left-box app-column-start-left shadow">
-              <!-- <img v-if="article.isTop == 1" class="istop" src="../assets/istop.jpg" /> -->
               <img class="article-list-left-img" :src="article.img" />
-              <span class="base-title text-two-line-omit">{{article.title}}</span>
+              <div style="height:40px;" class="app-row-start-layout">
+                <span class="base-title text-two-line-omit">{{article.title}}</span>
+                <div v-if="article.isTop==1" class="isTop">
+                  <span>置顶</span>
+                </div>
+              </div>
               <div class="article-list-left-summary text-two-line-omit">{{article.summary}}</div>
               <div class="posts-default-info">
                 <span><i class="el-icon-user-solid"></i> Ivan</span>

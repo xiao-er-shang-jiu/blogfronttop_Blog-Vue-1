@@ -1,5 +1,5 @@
 <template>
-  <div style="height:300px;" class="app-column-center-layout">
+  <div style="height:600px;" class="app-column-center-layout">
     <span>登录中..正在跳转回当前页面..</span>
   </div>
 </template>

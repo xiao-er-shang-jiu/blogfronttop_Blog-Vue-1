@@ -28,12 +28,20 @@
             <div class="contentToggle" v-if="contentStatus" @click="contentStatus=!contentStatus">
               <span style="font-size:12px;">展开阅读全文</span>
             </div>
+            <div class="articleTips">
+              <span>本站文章除注明转载外，均为本站原创。欢迎任何形式的转载，但请务必注明出处，尊重他人劳动共创开源社区。转载请注明：</span>
+              <span>标题：{{article.title}}</span>
+              <span>地址：<a>http://blog.ivan.group/article/{{article.id}}</a></span>
+              <span>文章转载自: </span>
+              <span>Ivan | 晏飞个人博客 [<a href="http://blog.ivan.group" target="_blank">http://blog.ivan.group</a>]</span>
+            </div>
             <div class="share-box hidden-xs-only">
               <span>分享至: </span>
               <img @click="share('qq')" class="share-img" src="../assets/share/qq.jpg" />
               <img @click="share('qq-zone')" class="share-img" src="../assets/share/qq_zone.jpg" />
               <img @click="share('weibo')" class="share-img" src="../assets/share/weibo.jpg" />
             </div>
+            <!--上一篇/下一篇-->
             <div class="router-article-box">
               <span class="router-article" @click="routerTo(article.beforeArticle.id)" v-if="article.beforeArticle">
                 上一篇 : {{article.beforeArticle.title}}
@@ -156,6 +164,8 @@ export default {
   //变量定义
   data () {
     return {
+      //分享
+      activeNames: ['1'],
       name:'',
       avatarUrl:'',
       email:'',
@@ -217,6 +227,11 @@ export default {
     this.show = false
   },
   methods: {
+    //分享
+    handleChange(val) {
+      console.log(val);
+    },
+
     //加载全部
     contentToggle(){
         this.curHeight = this.$refs.bodyFont.offsetHeight;
@@ -267,41 +282,6 @@ export default {
           }
       });
     },
-
-    //评论测试
-    // sendDev(){
-    //   if(this.content != ""){
-    //     const loading = this.$loading({
-    //       lock: true,
-    //       text: 'Loading',
-    //       spinner: 'el-icon-loading',
-    //       background: 'rgba(0, 0, 0, 0.7)'
-    //     });
-
-    //     var form = {
-    //       name: 'Ivan',
-    //       email: '',
-    //       avatarUrl: '',
-    //       content: this.content,
-    //       articleId: this.$route.params.id,
-    //       parentId: 0
-    //     }
-    //     postComment(form).then((res) => {
-    //       if(res.code == 200){
-    //         this.successPop(res.msg)
-    //       } else {
-    //         this.errorPop(res)
-    //       }
-    //       clearTimeout(this.timer);       //清除延迟执行
-    //       this.timer = setTimeout(()=>{   //设置延迟执行
-    //         this.reload()
-    //         loading.close();
-    //       },1500);
-    //     })
-    //   } else if(this.content == ""){
-    //     this.$message.error('说点什么吧!')
-    //   }
-    // },
 
     //发表评论
     send(){
@@ -652,7 +632,7 @@ export default {
   
   .center-left-item-box >>> pre {
     line-height: 1.7em;
-    overflow: auto;
+    overflow: overlay;
     padding: 6px 10px;
     background: #F5F5F5;
     border: 1px solid #CCCCCC
@@ -664,7 +644,7 @@ export default {
     max-width: initial;
     padding: 0;
     margin: 0;
-    overflow: initial;
+    overflow: overlay;
     line-height: inherit;
     font-size: .85em;
     white-space: pre;

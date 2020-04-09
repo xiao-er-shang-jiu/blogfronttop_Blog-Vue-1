@@ -25,7 +25,6 @@
     padding: 10px 0px 10px 0px;
   }
   .base-title{
-    margin-top: 10px;
     font-size: 18px;
     font-weight: bold;
   }
@@ -105,7 +104,7 @@
     color:#0F0F0F;
   }
   .article-list-left-summary{
-    margin: 10px 0px 10px 0px;
+    margin: 0px 0px 10px 0px;
     line-height:1.8;
     font-size:14px;
     color:#566573;
@@ -147,9 +146,9 @@
     background: #eee;
   }
   .share-img{
-    width: 25px;
-    height: 25px;
-    margin-left: 20px;
+    width: 30px;
+    height: 30px;
+    margin: 0px 20px;
     cursor: pointer;
   }
   /* 前后篇幅文章 */
@@ -432,6 +431,29 @@
   .bottom-Record{
     margin: 0px 0px 0px 150px;
   }
+  /* 文章提示 */
+  .articleTips{
+    display: flex;
+    flex-direction: column;
+    margin: 0px 20px 20px 20px;
+    padding: 10px;
+    font-size: 13px;
+    background: #313232;
+    color: #eee;
+    border-radius: 5px;
+    line-height: 1.5;
+  }
+  .articleTips a{
+    cursor: pointer;
+  }
+  .isTop{
+    margin-left: 10px;
+    border: 1px solid #BC0F08;
+    border-radius: 3px;
+    padding: 0px 10px;
+    color: #BC0F08;
+    font-size: 12px;
+  }
 
 
   /* 移动端样式 */
@@ -574,5 +596,17 @@
     }
     .bottom-Record{
       margin: 0px 0px 20px 130px;
+    }
+    /* 文章提示 */
+    .articleTips{
+      display: flex;
+      flex-direction: column;
+      margin: 0px 20px 20px 20px;
+      padding: 10px;
+      font-size: 12px;
+      background: #313232;
+      color: #eee;
+      border-radius: 5px;
+      line-height: 1.6;
     }
   }
