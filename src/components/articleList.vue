@@ -17,7 +17,7 @@
               <div style="height:40px;" class="app-row-start-layout">
                 <span class="base-title text-two-line-omit">{{article.title}}</span>
                 <div v-if="article.isTop==1" class="isTop">
-                  <span>置顶</span>
+                  <span>Top</span>
                 </div>
               </div>
               <div class="article-list-left-summary text-two-line-omit">{{article.summary}}</div>
