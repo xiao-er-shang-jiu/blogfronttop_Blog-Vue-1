@@ -454,6 +454,29 @@
     color: #BC0F08;
     font-size: 12px;
   }
+  /* 打赏栏 */
+  .reward-title{
+    width: 120px;
+    margin: 20px 0px 15px 0px;
+    padding: 10px 15px;
+    background: #FFDDDD;
+    border-radius: 10px;
+    color: #FC5F03;
+    cursor: pointer;
+  }
+  .reward-title:hover, .reward-title:focus, .reward-title:active {
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+    background-color: #313232;
+    color: #E2E2E2;
+}
+.footer__heart2 {
+  display: inline-block;
+  -webkit-animation: beating 1s infinite;
+  animation: beating 1s infinite;
+}
 
 
   /* 移动端样式 */
